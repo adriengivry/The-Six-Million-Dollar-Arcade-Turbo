@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="..\src\Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Utilities.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{4EE65ABB-5144-44EA-B8AF-8C259F2EDECC}</ProjectGuid>
