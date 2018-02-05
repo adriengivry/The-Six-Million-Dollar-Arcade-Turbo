@@ -15,6 +15,8 @@ public:
 	Window();
 	~Window();
 
+	irr::IrrlichtDevice* GetDevice() const { return m_device; }
+
 private:
 	irr::IrrlichtDevice* m_device;
 };

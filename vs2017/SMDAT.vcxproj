@@ -25,8 +25,11 @@
     <ClCompile Include="..\src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\AppInfo.h" />
     <ClInclude Include="..\include\EventManager.h" />
     <ClInclude Include="..\include\Game.h" />
+    <ClInclude Include="..\include\GameInfo.h" />
+    <ClInclude Include="..\include\SharedContext.h" />
     <ClInclude Include="..\include\Utilities.h" />
     <ClInclude Include="..\include\Window.h" />
   </ItemGroup>
