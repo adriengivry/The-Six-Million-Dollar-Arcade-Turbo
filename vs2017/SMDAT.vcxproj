@@ -114,7 +114,7 @@
       <AdditionalDependencies>Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\bin\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
+      <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\dll\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -130,7 +130,7 @@
       <AdditionalDependencies>Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\bin\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
+      <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\dll\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,7 +150,7 @@
       <AdditionalDependencies>Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\bin\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
+      <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\dll\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -170,7 +170,7 @@
       <AdditionalDependencies>Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\bin\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
+      <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\dll\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
