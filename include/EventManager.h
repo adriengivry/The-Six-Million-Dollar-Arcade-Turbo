@@ -7,11 +7,13 @@ class EventManager : public irr::IEventReceiver
 {
 public:
 	EventManager();
+	~EventManager();
 
 	void			InitKeyMaps();
 	bool			OnEvent(const irr::SEvent& event) override;
 	virtual bool	IsKeyDown(irr::EKEY_CODE keyCode) const;
-	irr::SKeyMap*	GetKeyMap(const std::string& keyMap) const;
+	irr::SKeyMap*	GetKeyMap(const std::string& keyMap)		{ return m_keyMaps["FPS_CAMERA"].first; }
+	irr::s32		GetKeyMapSize(const std::string& keyMap)	{ return m_keyMaps["FPS_CAMERA"].second; }
 
 private:
 	bool m_keyIsDown[irr::KEY_KEY_CODES_COUNT];
