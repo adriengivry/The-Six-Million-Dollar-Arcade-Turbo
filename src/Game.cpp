@@ -10,6 +10,8 @@ Game::Game()
 	m_sharedContext.eventManager	= &m_eventManager;
 
 	m_scene = new Scene(&m_sharedContext);
+
+	m_scene->InitScene();
 }
 
 Game::~Game()
