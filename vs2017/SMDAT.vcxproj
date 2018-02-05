@@ -18,6 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Main.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{4EE65ABB-5144-44EA-B8AF-8C259F2EDECC}</ProjectGuid>
@@ -69,7 +72,30 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir)..\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)..\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir)..\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)..\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir)..\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)..\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir)..\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)..\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -142,9 +168,6 @@
       <Command>copy $(ProjectDir)..\dependencies\irrlicht-1.8.4\bin\Win$(PlatformArchitecture)-visualstudio\Irrlicht.dll $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
