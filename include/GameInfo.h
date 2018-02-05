@@ -6,8 +6,11 @@ struct GameInfo
 
 	void Reset()
 	{
-		score = 0;
+		// The default score represent the default amount of cash you have at the beginning of the game
+		defaultScore = 20000.f;
+		currentScore = defaultScore;
 	}
 
-	int score;
+	irr::f32 defaultScore;
+	irr::f32 currentScore;
 };

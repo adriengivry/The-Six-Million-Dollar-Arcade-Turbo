@@ -8,12 +8,12 @@ public:
 	Game();
 	~Game();
 
-	void Setup();
-	void Close();
-	void Run();
-	void Update();
+	void Run()		const;
+	void Update()	const;
 
 private:
-	SharedContext m_sharedContext;
-	Window m_window;
+	SharedContext				m_sharedContext;
+	EventManager				m_eventManager;
+	Window*						m_window;
+	irr::scene::ISceneManager*	m_sceneManager;
 };

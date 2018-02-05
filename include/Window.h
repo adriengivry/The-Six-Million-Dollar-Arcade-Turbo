@@ -1,22 +1,31 @@
 #pragma once
 #include <irrlicht.h>
+#include "EventManager.h"
 
 typedef irr::video::E_DRIVER_TYPE DriverType;
+typedef irr::core::dimension2d<irr::u32> WindowSize;
 
 class Window
 {
 public:
-	const irr::u32		WINDOW_WIDTH		= 800;
-	const irr::u32		WINDOW_HEIGHT		= 600;
-	const bool			WINDOW_FULLSCREEN	= false;
-	const bool			WINDOW_VSYNC		= false;
-	const DriverType	DEVICE_TYPE			= irr::video::EDT_OPENGL;
-	
-	Window();
+	static const irr::u32		WINDOW_WIDTH			= 800;
+	static const irr::u32		WINDOW_HEIGHT			= 600;
+	static const bool			WINDOW_FULLSCREEN		= false;
+	static const bool			WINDOW_VSYNC			= false;
+	static const bool			WINDOW_STENCILBUFFER	= false;
+	static const irr::u32		WINDOW_CLEAR_COLOR_R	= 0;
+	static const irr::u32		WINDOW_CLEAR_COLOR_G	= 0;
+	static const irr::u32		WINDOW_CLEAR_COLOR_B	= 255;
+	static const DriverType		DEVICE_TYPE				= irr::video::EDT_OPENGL;
+
+	explicit Window(EventManager* p_eventManager = nullptr);
 	~Window();
 
-	irr::IrrlichtDevice* GetDevice() const { return m_device; }
-
+	irr::IrrlichtDevice*		GetDevice() const		{ return m_device; }
+	irr::video::IVideoDriver*	GetDriver() const		{ return m_driver; }
+	irr::video::SColor&			GetBackgroundColor()	{ return m_backgroundColor; }
 private:
-	irr::IrrlichtDevice* m_device;
+	irr::IrrlichtDevice*		m_device;
+	irr::video::IVideoDriver*	m_driver;
+	irr::video::SColor			m_backgroundColor;
 };

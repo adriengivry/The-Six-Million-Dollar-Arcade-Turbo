@@ -1,14 +1,15 @@
 #pragma once
-#include "AppInfo.h"
 #include "GameInfo.h"
 
 class Window;
 class EventManager;
 
+typedef irr::scene::ISceneManager SceneManager;
+
 struct SharedContext
 {
-	GameInfo gameInfo;
-	AppInfo appInfo;
-	Window* window;
-	EventManager* eventManager;
+	GameInfo		gameInfo;
+	Window*			window;
+	SceneManager*	sceneManager;
+	EventManager*	eventManager;
 };
