@@ -1,6 +1,7 @@
 #pragma once
 #include "Window.h"
 #include "SharedContext.h"
+#include "Scene.h"
 
 class Game
 {
@@ -12,8 +13,8 @@ public:
 	void Update()	const;
 
 private:
-	SharedContext				m_sharedContext;
-	EventManager				m_eventManager;
-	Window*						m_window;
-	irr::scene::ISceneManager*	m_sceneManager;
+	SharedContext	m_sharedContext;
+	EventManager	m_eventManager;
+	Window*			m_window;
+	Scene*			m_scene;
 };

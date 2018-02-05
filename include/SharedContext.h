@@ -1,5 +1,6 @@
 #pragma once
 #include "GameInfo.h"
+#include <irrlicht.h>
 
 class Window;
 class EventManager;

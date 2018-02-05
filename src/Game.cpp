@@ -2,18 +2,19 @@
 
 Game::Game()
 {
-	m_window		= new Window(&m_eventManager);
-	m_sceneManager	= m_window->GetDevice()->getSceneManager();
+	m_window	= new Window(&m_eventManager);
 
-	// Update the sharedContext pointers
+	// Update SharedContext pointers
 	m_sharedContext.window			= m_window;
-	m_sharedContext.sceneManager	= m_sceneManager;
+	m_sharedContext.sceneManager	= m_window->GetDevice()->getSceneManager();
 	m_sharedContext.eventManager	= &m_eventManager;
+
+	m_scene = new Scene(&m_sharedContext);
 }
 
 Game::~Game()
 {
-	// Deleting window will drop the device too
+	delete m_scene;
 	delete m_window;
 }
 
@@ -28,7 +29,7 @@ void Game::Update() const
 {
 	m_window->GetDriver()->beginScene(true, true, m_window->GetBackgroundColor());
 
-	m_sceneManager->drawAll();
+	m_scene->GetSceneManager().drawAll();
 
 	m_window->GetDriver()->endScene();
 }

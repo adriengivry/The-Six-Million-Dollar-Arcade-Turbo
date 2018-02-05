@@ -1,5 +1,7 @@
 #pragma once
 
+#include <irrlicht.h>
+
 struct GameInfo
 {
 	GameInfo() { Reset(); }
