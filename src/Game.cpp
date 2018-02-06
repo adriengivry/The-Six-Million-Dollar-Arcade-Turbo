@@ -29,11 +29,18 @@ void Game::Run()
 
 void Game::Update()
 {
+	m_sharedContext.currentTime = m_window->GetDevice()->getTimer()->getTime();
+	m_sharedContext.deltaTime = (m_sharedContext.currentTime - m_sharedContext.lastTime) / 1000.f;
+	m_sharedContext.lastTime = m_window->GetDevice()->getTimer()->getTime();
+
 	m_window->GetDriver()->beginScene(true, true, m_window->GetBackgroundColor());
 
 	irr::core::stringw titre(m_window->GetDriver()->getFPS());
 	m_window->GetDevice()->setWindowCaption(titre.c_str());
+	m_scene->Update();
 	m_scene->GetSceneManager().drawAll();
 
 	m_window->GetDriver()->endScene();
+
+	
 }
