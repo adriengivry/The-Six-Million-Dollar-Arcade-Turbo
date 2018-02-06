@@ -25,25 +25,22 @@ void Player::InitComponents()
 
 	m_root = sceneManager.addEmptySceneNode();
 	
+	irr::SKeyMap*	fpsKeyMap		= m_sharedContext->eventManager->GetKeyMap("FPS_CAMERA");
+	const irr::s32	fpsKeyMapSize	= m_sharedContext->eventManager->GetKeyMapSize("FPS_CAMERA");
+
 	// Camera Component
-	m_cameraComponent = sceneManager.addCameraSceneNodeFPS(
-		m_root, 100.0f, 0.3f, -1,
-		m_sharedContext->eventManager->GetKeyMap("FPS_CAMERA"),
-		m_sharedContext->eventManager->GetKeyMapSize("FPS_CAMERA"), true, 1.f);
+	m_cameraComponent = sceneManager.addCameraSceneNodeFPS(m_root, 100.0f, 0.3f, -1, fpsKeyMap, fpsKeyMapSize, true, 1.f);
 
 	// Get Camera Animator
 	m_cameraAnimator = static_cast<irr::scene::ISceneNodeAnimatorCameraFPS*>(*m_cameraComponent->getAnimators().begin());
 
 	// Camera Collider
-	m_collisionResponse = sceneManager.createCollisionResponseAnimator(
-		m_sharedContext->scene->GetWorld()->GetSelector(), m_cameraComponent, irr::core::vector3df(30, 50, 30),
-		irr::core::vector3df(0, -1, 0), irr::core::vector3df(0, 30, 0));
+	m_collisionResponse = sceneManager.createCollisionResponseAnimator(m_sharedContext->scene->GetWorld()->GetSelector(), m_cameraComponent);
+	m_collisionResponse->setGravity(irr::core::vector3df(0, m_gravity, 0));
 	m_cameraComponent->addAnimator(m_collisionResponse);
 
 	// Animated FPS arms
-	m_animatedMeshComp = sceneManager.addAnimatedMeshSceneNode(
-		sceneManager.getMesh(Utils::LoadAsset("meshes/gun.md2").c_str()),
-		m_cameraComponent);
+	m_animatedMeshComp = sceneManager.addAnimatedMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/gun.md2").c_str()), m_cameraComponent);
 	m_animatedMeshComp->setRotation(irr::core::vector3df(0, -90, 0));
 	m_animatedMeshComp->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/gun.jpg").c_str()));
 }

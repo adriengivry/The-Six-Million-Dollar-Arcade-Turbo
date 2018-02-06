@@ -7,7 +7,7 @@ typedef irr::scene::ISceneNodeAnimatorCollisionResponse CollisionResponse;
 class Player
 {
 public:
-	static const irr::s32 PLAYER_GRAVITY = -2;
+	static const irr::s32 PLAYER_GRAVITY = -3;
 
 	explicit Player(SharedContext* p_sharedContext);
 	~Player();
@@ -27,8 +27,8 @@ private:
 	irr::scene::ISceneNodeAnimatorCameraFPS*	m_cameraAnimator;
 	irr::scene::IAnimatedMeshSceneNode*			m_animatedMeshComp;
 	CollisionResponse*							m_collisionResponse;
+
 	irr::f32 m_gravity;
 	irr::f32 m_gravityTimer;
 	irr::f32 m_gunRotation;
-	irr::core::vector3df m_newGunRotation;
 };
