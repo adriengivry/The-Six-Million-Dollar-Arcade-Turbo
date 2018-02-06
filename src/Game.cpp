@@ -21,16 +21,18 @@ Game::~Game()
 }
 
 
-void Game::Run() const
+void Game::Run()
 {
 	while (m_sharedContext.window->GetDevice()->run())
 		Update();
 }
 
-void Game::Update() const
+void Game::Update()
 {
 	m_window->GetDriver()->beginScene(true, true, m_window->GetBackgroundColor());
 
+	irr::core::stringw titre(m_window->GetDriver()->getFPS());
+	m_window->GetDevice()->setWindowCaption(titre.c_str());
 	m_scene->GetSceneManager().drawAll();
 
 	m_window->GetDriver()->endScene();

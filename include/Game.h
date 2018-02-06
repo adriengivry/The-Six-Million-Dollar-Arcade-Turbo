@@ -9,8 +9,8 @@ public:
 	Game();
 	~Game();
 
-	void Run()		const;
-	void Update()	const;
+	void Run();
+	void Update();
 
 private:
 	SharedContext	m_sharedContext;
