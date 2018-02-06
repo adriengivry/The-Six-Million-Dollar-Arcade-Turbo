@@ -1,7 +1,11 @@
 #include "EventManager.h"
+#include "Scene.h"
+#include "World.h"
 
-EventManager::EventManager()
+EventManager::EventManager(SharedContext* p_sharedContext)
 {
+	m_sharedContext = p_sharedContext;
+
 	for (auto& i : m_keyIsDown)
 		i = false;
 
@@ -33,6 +37,14 @@ void EventManager::InitKeyMaps()
 	fpsKeyMap[4].KeyCode	= irr::KEY_SPACE;
 
 	m_keyMaps["FPS_CAMERA"].first = fpsKeyMap;
+}
+
+void EventManager::Update() const
+{
+	if (IsKeyDown(irr::KEY_KEY_X))
+	{
+		m_sharedContext->scene->GetWorld()->StartRotation();
+	}
 }
 
 bool EventManager::OnEvent(const irr::SEvent& event)

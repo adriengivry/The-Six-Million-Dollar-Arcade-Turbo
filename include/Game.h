@@ -9,12 +9,14 @@ public:
 	Game();
 	~Game();
 
+	void UpdateDeltaTime();
+
 	void Run();
 	void Update();
 
 private:
 	SharedContext	m_sharedContext;
-	EventManager	m_eventManager;
+	EventManager*	m_eventManager;
 	Window*			m_window;
 	Scene*			m_scene;
 };
