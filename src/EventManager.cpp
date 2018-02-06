@@ -1,6 +1,7 @@
 #include "EventManager.h"
 #include "Scene.h"
 #include "World.h"
+#include "Player.h"
 
 EventManager::EventManager(SharedContext* p_sharedContext)
 {
@@ -43,7 +44,7 @@ void EventManager::Update() const
 {
 	if (IsKeyDown(irr::KEY_KEY_X))
 	{
-		m_sharedContext->scene->GetWorld()->StartRotation();
+		m_sharedContext->scene->GetPlayer()->Reverse();
 	}
 }
 
