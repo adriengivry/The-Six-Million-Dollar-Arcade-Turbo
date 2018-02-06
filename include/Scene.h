@@ -14,4 +14,5 @@ public:
 private:
 	SharedContext*				m_sharedContext;
 	irr::scene::ISceneManager&	m_sceneManager;
+	irr::scene::IAnimatedMeshSceneNode*	m_fps;
 };
