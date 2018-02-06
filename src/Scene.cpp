@@ -10,19 +10,28 @@ Scene::Scene(SharedContext* p_sharedContext) :
 
 void Scene::InitScene()
 {
+	irr::scene::IMetaTriangleSelector* worldSel = m_sceneManager.createMetaTriangleSelector();
+
 	auto cube = m_sceneManager.addCubeSceneNode(200);
-	cube->setPosition(irr::core::vector3df(0, -200, 0));
+	cube->setPosition(irr::core::vector3df(0, -500, 0));
 	irr::scene::ITriangleSelector* selector = nullptr;
 	selector = m_sceneManager.createTriangleSelectorFromBoundingBox(cube);
-	cube->setTriangleSelector(selector);
+
+	auto cube2 = m_sceneManager.addCubeSceneNode(200);
+	cube2->setPosition(irr::core::vector3df(0, 500, 0));
+	irr::scene::ITriangleSelector* selector2 = nullptr;
+	selector2 = m_sceneManager.createTriangleSelectorFromBoundingBox(cube2);
+
+	worldSel->addTriangleSelector(selector);
+	worldSel->addTriangleSelector(selector2);
 	
 	m_camera = m_sceneManager.addCameraSceneNodeFPS(
 		nullptr, 100.0f, 0.3f, -1,
 		m_sharedContext->eventManager->GetKeyMap("FPS_CAMERA"),
 		m_sharedContext->eventManager->GetKeyMapSize("FPS_CAMERA"), true, 3.f);
 	irr::scene::ISceneNodeAnimator* anim = m_sceneManager.createCollisionResponseAnimator(
-		selector, m_camera, irr::core::vector3df(30, 50, 30),
-		irr::core::vector3df(0, -10, 0), irr::core::vector3df(0, 30, 0));
+		worldSel, m_camera, irr::core::vector3df(30, 50, 30),
+		irr::core::vector3df(0, -1, 0), irr::core::vector3df(0, 30, 0));
 	selector->drop(); // As soon as we're done with the selector, drop it.
 	m_camera->addAnimator(anim);
 	anim->drop();  // And likewise, drop the animator when we're done referring to it.
