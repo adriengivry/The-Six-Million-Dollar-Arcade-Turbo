@@ -17,4 +17,5 @@ private:
 	irr::scene::ISceneManager&	m_sceneManager;
 	irr::scene::IAnimatedMeshSceneNode*	m_fps;
 	irr::scene::ICameraSceneNode*	m_camera;
+	irr::scene::ISceneNode* m_world;
 };

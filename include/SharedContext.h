@@ -19,7 +19,10 @@ struct SharedContext
 	irr::f32 deltaTime = 0;
 
 	irr::f32 floorPos = 0;
-	bool isJumping = false;
+	bool isRotating = false;
+	bool isInverted = false;
 	irr::f32 ySpeed;
 	irr::f32 gravityAcc = -50;
+	irr::f32 playerYbackup;
+	irr::f32 worldRotation = 0;
 };
