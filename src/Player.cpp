@@ -10,6 +10,7 @@ Player::Player(SharedContext* p_sharedContext)
 	m_sharedContext = p_sharedContext;
 	m_gravity = PLAYER_GRAVITY;
 	m_gunRotation = 0.f;
+	m_mouseInverted = false;
 
 	InitComponents();
 }
@@ -80,5 +81,9 @@ void Player::Reverse()
 		m_gravityTimer = 0.f;
 		m_gravity *= -1;
 		m_collisionResponse->setGravity(irr::core::vector3df(0, m_gravity, 0));
+		m_mouseInverted = !m_mouseInverted;
+		m_cameraAnimator->setInvertMouse(m_mouseInverted);
+		m_cameraComponent->setUpVector(m_cameraComponent->getUpVector() * -1);
+
 	}
 }

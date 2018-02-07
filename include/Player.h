@@ -31,4 +31,6 @@ private:
 	irr::f32 m_gravity;
 	irr::f32 m_gravityTimer;
 	irr::f32 m_gunRotation;
+
+	bool m_mouseInverted;
 };
