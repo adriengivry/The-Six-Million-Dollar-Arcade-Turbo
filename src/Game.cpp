@@ -11,9 +11,9 @@ Game::Game()
 	m_scene = new Scene(&m_sharedContext);
 	m_sharedContext.scene = m_scene;
 
-	m_userInterface = new UserInterface(&m_sharedContext);
-
 	m_scene->InitScene();
+
+	m_userInterface = new UserInterface(&m_sharedContext);
 }
 
 Game::~Game()

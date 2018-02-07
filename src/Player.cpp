@@ -13,6 +13,7 @@ Player::Player(SharedContext* p_sharedContext)
 	m_mouseInverted = false;
 	m_invertEnd = true;
 	m_reversing = false;
+	m_shooting = false;
 
 	InitComponents();
 }
@@ -50,9 +51,12 @@ void Player::InitComponents()
 
 void Player::Update()
 {
+	m_sharedContext->eventManager->Activate();
+
 	m_gravityTimer += m_sharedContext->deltaTime;
 
 	RotateGun();
+	HandleEvents();
 }
 
 void Player::Reverse()
@@ -97,5 +101,5 @@ void Player::RotateGun()
 
 void Player::HandleEvents()
 {
-
+	m_shooting = m_sharedContext->eventManager->MouseLeftPressed();
 }

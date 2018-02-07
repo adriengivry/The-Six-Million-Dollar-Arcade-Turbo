@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "World.h"
 #include "Player.h"
+#include <iostream>
 
 EventManager::EventManager(SharedContext* p_sharedContext)
 {
@@ -9,6 +10,9 @@ EventManager::EventManager(SharedContext* p_sharedContext)
 
 	for (auto& i : m_keyIsDown)
 		i = false;
+
+	m_mouseLeft = false;
+	m_activate = false;
 
 	InitKeyMaps();
 }
@@ -53,10 +57,32 @@ bool EventManager::OnEvent(const irr::SEvent& event)
 	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 		m_keyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
 
+	if (m_activate)
+	{
+		switch (event.MouseInput.Event)
+		{
+		default: break;
+		case irr::EMIE_LMOUSE_LEFT_UP:
+			m_mouseLeft = false;
+			std::cout << m_mouseLeft << std::endl;
+			break;
+
+		case irr::EMIE_LMOUSE_PRESSED_DOWN:
+			m_mouseLeft = true;
+			std::cout << m_mouseLeft << std::endl;
+			break;
+		}
+	}
+
 	return false;
 }
 
 bool EventManager::IsKeyDown(const irr::EKEY_CODE keyCode) const
 {
 	return m_keyIsDown[keyCode];
+}
+
+void EventManager::Activate()
+{
+	m_activate = true;
 }
