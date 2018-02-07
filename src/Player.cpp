@@ -47,6 +47,10 @@ void Player::InitComponents()
 	m_animatedMeshComp = sceneManager.addAnimatedMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/gun.md2").c_str()), m_cameraComponent);
 	m_animatedMeshComp->setRotation(irr::core::vector3df(0, -90, 0));
 	m_animatedMeshComp->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/gun.jpg").c_str()));
+
+	// gun ray
+	m_gunRay = sceneManager.addMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/ray.obj").c_str()), m_cameraComponent);
+	m_gunRay->setPosition(irr::core::vector3df(9, -8, 30));
 }
 
 void Player::Update()
@@ -102,4 +106,6 @@ void Player::RotateGun()
 void Player::HandleEvents()
 {
 	m_shooting = m_sharedContext->eventManager->MouseLeftPressed();
+
+	m_gunRay->setVisible(m_shooting);
 }

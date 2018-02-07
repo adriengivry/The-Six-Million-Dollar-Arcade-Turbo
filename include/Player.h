@@ -29,6 +29,7 @@ private:
 	irr::scene::ICameraSceneNode*				m_cameraComponent;
 	irr::scene::ISceneNodeAnimatorCameraFPS*	m_cameraAnimator;
 	irr::scene::IAnimatedMeshSceneNode*			m_animatedMeshComp;
+	irr::scene::IMeshSceneNode*					m_gunRay;
 	CollisionResponse*							m_collisionResponse;
 
 	irr::f32 m_gravity;
