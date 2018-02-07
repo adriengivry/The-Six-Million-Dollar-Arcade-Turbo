@@ -11,6 +11,8 @@ Game::Game()
 	m_scene = new Scene(&m_sharedContext);
 	m_sharedContext.scene = m_scene;
 
+	m_userInterface = new UserInterface(&m_sharedContext);
+
 	m_scene->InitScene();
 }
 
@@ -31,24 +33,27 @@ void Game::UpdateDeltaTime()
 void Game::Run()
 {
 	while (m_sharedContext.window->GetDevice()->run())
+	{
 		Update();
+		Draw();
+	}
 }
 
 void Game::Update()
 {
 	UpdateDeltaTime();
-
-	m_window->GetDriver()->beginScene(true, true, m_window->GetBackgroundColor());
-
 	irr::core::stringw titre(m_window->GetDriver()->getFPS());
 	m_window->GetDevice()->setWindowCaption(titre.c_str());
-
 	m_eventManager->Update();
-
 	m_scene->Update();
+}
+
+void Game::Draw() const
+{
+	m_window->GetDriver()->beginScene(true, true, m_window->GetBackgroundColor());
+
 	m_scene->GetSceneManager().drawAll();
+	m_userInterface->Draw();
 
 	m_window->GetDriver()->endScene();
-
-	
 }

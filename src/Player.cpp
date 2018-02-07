@@ -32,7 +32,7 @@ void Player::InitComponents()
 	// Camera Component
 	m_cameraComponent = sceneManager.addCameraSceneNodeFPS(m_root, 100.0f, 0.3f, -1, fpsKeyMap, fpsKeyMapSize, true, 1.f);
 
-	// Get Camera Animator
+	// Camera Animator
 	m_cameraAnimator = static_cast<irr::scene::ISceneNodeAnimatorCameraFPS*>(*m_cameraComponent->getAnimators().begin());
 
 	// Camera Collider

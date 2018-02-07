@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "SharedContext.h"
 #include "Scene.h"
+#include "UserInterface.h"
 
 class Game
 {
@@ -13,10 +14,12 @@ public:
 
 	void Run();
 	void Update();
+	void Draw() const;
 
 private:
 	SharedContext	m_sharedContext;
 	EventManager*	m_eventManager;
 	Window*			m_window;
 	Scene*			m_scene;
+	UserInterface*	m_userInterface;
 };
