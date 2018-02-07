@@ -31,6 +31,7 @@ private:
 	irr::scene::IAnimatedMeshSceneNode*			m_animatedMeshComp;
 	irr::scene::IMeshSceneNode*					m_gunRay;
 	CollisionResponse*							m_collisionResponse;
+	irr::scene::IParticleSystemSceneNode*		m_particleSystem;
 
 	irr::f32 m_gravity;
 	irr::f32 m_gravityTimer;

@@ -48,15 +48,22 @@ void Player::InitComponents()
 	m_animatedMeshComp->setRotation(irr::core::vector3df(0, -90, 0));
 	m_animatedMeshComp->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/gun.jpg").c_str()));
 
+	const irr::core::vector3df gunExitPoint(9, -8, 30);
+
 	// gun ray
 	m_gunRay = sceneManager.addMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/ray.obj").c_str()), m_cameraComponent);
-	m_gunRay->setPosition(irr::core::vector3df(9, -8, 30));
+	m_gunRay->setPosition(gunExitPoint);
+
+	// Gun ray particules
+	m_particleSystem = sceneManager.addParticleSystemSceneNode(true, m_cameraComponent);
+	m_particleSystem->setPosition(gunExitPoint + irr::core::vector3df(0, 0, 10));
+	irr::scene::IParticleAffector* affector = m_particleSystem->createGravityAffector();
+	m_particleSystem->addAffector(affector);
+
 }
 
 void Player::Update()
 {
-	m_sharedContext->eventManager->Activate();
-
 	m_gravityTimer += m_sharedContext->deltaTime;
 
 	RotateGun();
@@ -108,4 +115,5 @@ void Player::HandleEvents()
 	m_shooting = m_sharedContext->eventManager->MouseLeftPressed();
 
 	m_gunRay->setVisible(m_shooting);
+	m_particleSystem->setVisible(m_shooting);
 }

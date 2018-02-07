@@ -12,7 +12,6 @@ EventManager::EventManager(SharedContext* p_sharedContext)
 		i = false;
 
 	m_mouseLeft = false;
-	m_activate = false;
 
 	InitKeyMaps();
 }
@@ -53,9 +52,10 @@ void EventManager::Update() const
 bool EventManager::OnEvent(const irr::SEvent& event)
 {
 	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
+	{
 		m_keyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
-
-	if (m_activate)
+	}
+	else if (event.EventType == irr::EET_MOUSE_INPUT_EVENT)
 	{
 		switch (event.MouseInput.Event)
 		{
@@ -78,9 +78,4 @@ bool EventManager::OnEvent(const irr::SEvent& event)
 bool EventManager::IsKeyDown(const irr::EKEY_CODE keyCode) const
 {
 	return m_keyIsDown[keyCode];
-}
-
-void EventManager::Activate()
-{
-	m_activate = true;
 }
