@@ -33,6 +33,9 @@ private:
 	CollisionResponse*							m_collisionResponse;
 	irr::scene::IParticleSystemSceneNode*		m_particleSystem;
 
+	irr::scene::IParticleCylinderEmitter* m_emitter;
+	irr::scene::ILightSceneNode* m_gunLight;
+
 	irr::f32 m_gravity;
 	irr::f32 m_gravityTimer;
 	irr::f32 m_gunRotation;
@@ -42,4 +45,6 @@ private:
 	bool m_reversing;
 
 	bool m_shooting;
+
+	irr::f32 m_rayLength;
 };

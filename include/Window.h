@@ -11,7 +11,7 @@ public:
 	static const irr::u32		WINDOW_WIDTH			= 800;
 	static const irr::u32		WINDOW_HEIGHT			= 600;
 	static const bool			WINDOW_FULLSCREEN		= false;
-	static const bool			WINDOW_VSYNC			= false;
+	static const bool			WINDOW_VSYNC			= true;
 	static const bool			WINDOW_STENCILBUFFER	= false;
 	static const irr::u32		WINDOW_CLEAR_COLOR_R	= 0;
 	static const irr::u32		WINDOW_CLEAR_COLOR_G	= 0;
