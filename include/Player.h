@@ -16,6 +16,8 @@ public:
 	void Update();
 
 	void Reverse();
+	void RotateGun();
+	void HandleEvents();
 
 	irr::scene::ICameraSceneNode*		GetCamera() const { return m_cameraComponent; }
 	irr::scene::IAnimatedMeshSceneNode* GetAnimatedMesh() const { return m_animatedMeshComp; }
@@ -33,4 +35,8 @@ private:
 	irr::f32 m_gunRotation;
 
 	bool m_mouseInverted;
+	bool m_invertEnd;
+	bool m_reversing;
+
+	bool m_shooting;
 };

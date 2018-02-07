@@ -11,6 +11,8 @@ Player::Player(SharedContext* p_sharedContext)
 	m_gravity = PLAYER_GRAVITY;
 	m_gunRotation = 0.f;
 	m_mouseInverted = false;
+	m_invertEnd = true;
+	m_reversing = false;
 
 	InitComponents();
 }
@@ -50,6 +52,23 @@ void Player::Update()
 {
 	m_gravityTimer += m_sharedContext->deltaTime;
 
+	RotateGun();
+}
+
+void Player::Reverse()
+{
+	if (m_gravityTimer >= 1.f)
+	{
+		m_reversing = true;
+		m_invertEnd = false;
+		m_gravityTimer = 0.f;
+		m_gravity *= -1;
+		m_collisionResponse->setGravity(irr::core::vector3df(0, m_gravity, 0));
+	}
+}
+
+void Player::RotateGun()
+{
 	m_animatedMeshComp->setRotation(m_animatedMeshComp->getRotation() - irr::core::vector3df(0, 0, m_gunRotation));
 
 	if (m_gravity > 0)
@@ -59,6 +78,7 @@ void Player::Update()
 		if (m_gunRotation > 180.f)
 		{
 			m_gunRotation = 180.f;
+			m_reversing = false;
 		}
 	}
 	else
@@ -68,22 +88,14 @@ void Player::Update()
 		if (m_gunRotation < 0.f)
 		{
 			m_gunRotation = 0.f;
+			m_reversing = false;
 		}
 	}
 
 	m_animatedMeshComp->setRotation(m_animatedMeshComp->getRotation() + irr::core::vector3df(0, 0, m_gunRotation));
 }
 
-void Player::Reverse()
+void Player::HandleEvents()
 {
-	if (m_gravityTimer >= 1.f)
-	{
-		m_gravityTimer = 0.f;
-		m_gravity *= -1;
-		m_collisionResponse->setGravity(irr::core::vector3df(0, m_gravity, 0));
-		m_mouseInverted = !m_mouseInverted;
-		m_cameraAnimator->setInvertMouse(m_mouseInverted);
-		m_cameraComponent->setUpVector(m_cameraComponent->getUpVector() * -1);
 
-	}
 }

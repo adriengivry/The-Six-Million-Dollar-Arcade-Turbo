@@ -24,27 +24,36 @@ void World::InitComponents()
 	m_root = sceneManager.addEmptySceneNode();
 	m_selector = sceneManager.createMetaTriangleSelector();
 
-	auto cube1 = sceneManager.addCubeSceneNode(100, m_root);
-	cube1->setPosition(irr::core::vector3df(0, -500, 0));
+	auto cube1 = sceneManager.addCubeSceneNode(300, m_root);
+	cube1->setPosition(irr::core::vector3df(0, -400, 0));
 	cube1->setScale(irr::core::vector3df(2, 1, 20));
 	cube1->setMaterialFlag(irr::video::EMF_LIGHTING, true);
 	cube1->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/terrain.jpg").c_str()));
 
-	auto cube2 = sceneManager.addCubeSceneNode(100, m_root);
-	cube2->setPosition(irr::core::vector3df(0, 500, 0));
+	auto cube2 = sceneManager.addCubeSceneNode(300, m_root);
+	cube2->setPosition(irr::core::vector3df(0, 400, 0));
 	cube2->setScale(irr::core::vector3df(2, 1, 20));
 	cube2->setMaterialFlag(irr::video::EMF_LIGHTING, true);
 	cube2->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/terrain.jpg").c_str()));
 
-	auto cube3 = sceneManager.addCubeSceneNode(100, m_root);
-	cube3->setPosition(irr::core::vector3df(0, -400, 0));
-	cube3->setScale(irr::core::vector3df(2, 1, 1));
+	auto cube3 = sceneManager.addCubeSceneNode(300, m_root);
+	cube3->setPosition(irr::core::vector3df(-400, 0, 0));
+	cube3->setRotation(irr::core::vector3df(0, 0, 90));
+	cube3->setScale(irr::core::vector3df(2, 1, 20));
 	cube3->setMaterialFlag(irr::video::EMF_LIGHTING, true);
-	cube3->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/rock.jpg").c_str()));
+	cube3->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/terrain.jpg").c_str()));
+
+	auto cube4 = sceneManager.addCubeSceneNode(300, m_root);
+	cube4->setPosition(irr::core::vector3df(400, 0, 0));
+	cube4->setRotation(irr::core::vector3df(0, 0, 90));
+	cube4->setScale(irr::core::vector3df(2, 1, 20));
+	cube4->setMaterialFlag(irr::video::EMF_LIGHTING, true);
+	cube4->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/terrain.jpg").c_str()));
 
 	AddToWorldSelector(sceneManager.createTriangleSelectorFromBoundingBox(cube1));
 	AddToWorldSelector(sceneManager.createTriangleSelectorFromBoundingBox(cube2));
 	AddToWorldSelector(sceneManager.createTriangleSelectorFromBoundingBox(cube3));
+	AddToWorldSelector(sceneManager.createTriangleSelectorFromBoundingBox(cube4));
 }
 
 void World::AddToWorldSelector(irr::scene::ITriangleSelector* p_selector) const
