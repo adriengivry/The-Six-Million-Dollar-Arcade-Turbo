@@ -17,7 +17,8 @@ UserInterface::UserInterface(SharedContext* p_sharedContext)
 	m_font = m_gui->getFont("../assets/fonts/fontcourier.bmp");
 
 	
-	
+	m_text = m_sharedContext->window->GetDevice()->getSceneManager()->addTextSceneNode(m_font, L"SCORE",
+		irr::video::SColor(255, 255, 255, 255), 0, irr::core::vector3df(m_sharedContext->scene->GetPlayer()->GetCamera()->getPosition()));
 }
 
 UserInterface::~UserInterface()
@@ -39,6 +40,5 @@ void UserInterface::Draw()
 
 void UserInterface::Update()
 {
-	m_text = m_sharedContext->window->GetDevice()->getSceneManager()->addTextSceneNode(m_font, L"SCORE",
-		irr::video::SColor(255, 255, 255, 255), 0, irr::core::vector3df(m_sharedContext->scene->GetPlayer()->GetCamera()->getPosition()));
+	m_text->setPosition(irr::core::vector3df(m_sharedContext->scene->GetPlayer()->GetCamera()->getPosition()));
 }
