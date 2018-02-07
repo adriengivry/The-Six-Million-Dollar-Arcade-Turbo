@@ -46,6 +46,7 @@ void Game::Update()
 	m_window->GetDevice()->setWindowCaption(titre.c_str());
 	m_eventManager->Update();
 	m_scene->Update();
+	m_userInterface->Update();
 }
 
 void Game::Draw() const

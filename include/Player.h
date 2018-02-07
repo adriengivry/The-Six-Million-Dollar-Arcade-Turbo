@@ -21,6 +21,7 @@ public:
 
 	irr::scene::ICameraSceneNode*		GetCamera() const { return m_cameraComponent; }
 	irr::scene::IAnimatedMeshSceneNode* GetAnimatedMesh() const { return m_animatedMeshComp; }
+	CollisionResponse*					GetCollider() const { return m_collisionResponse; }
 
 private:
 	SharedContext*								m_sharedContext;

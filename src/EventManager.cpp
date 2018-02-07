@@ -46,10 +46,8 @@ void EventManager::InitKeyMaps()
 
 void EventManager::Update() const
 {
-	if (IsKeyDown(irr::KEY_KEY_X))
-	{
-		m_sharedContext->scene->GetPlayer()->Reverse();
-	}
+
+	m_sharedContext->scene->GetPlayer()->Reverse();
 }
 
 bool EventManager::OnEvent(const irr::SEvent& event)
