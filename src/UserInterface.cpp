@@ -18,7 +18,7 @@ UserInterface::UserInterface(SharedContext* p_sharedContext)
 
 	
 	m_text = m_sharedContext->window->GetDevice()->getSceneManager()->addTextSceneNode(m_font, L"SCORE",
-		irr::video::SColor(255, 255, 255, 255), 0, irr::core::vector3df(m_sharedContext->scene->GetPlayer()->GetCamera()->getPosition()));
+		irr::video::SColor(255, 255, 255, 255), 0, irr::core::vector3df(0, 0, 0));
 }
 
 UserInterface::~UserInterface()
@@ -40,5 +40,4 @@ void UserInterface::Draw()
 
 void UserInterface::Update()
 {
-	m_text->setPosition(irr::core::vector3df(m_sharedContext->scene->GetPlayer()->GetCamera()->getPosition()));
 }
