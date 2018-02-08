@@ -65,6 +65,14 @@ void Player::InitComponents()
 	m_gunRay->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
 	m_gunRay->getMaterial(0).EmissiveColor.set(255, 255, 255, 0);
 	auto gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.7f));
+
+	// Ray collider
+	m_rayCollider = sceneManager.createCollisionResponseAnimator(nullptr, nullptr);
+	m_rayCollider->setTargetNode(m_gunRay);
+	m_rayCollider->setGravity(irr::core::vector3df(0, 0, 0));
+	m_rayCollider->setEllipsoidRadius(irr::core::vector3df(1000, 1000, 1000));
+	m_rayCollider->setWorld(m_sharedContext->scene->GetWorld()->GetSelector());
+	m_gunRay->addAnimator(m_rayCollider);
 }
 
 void Player::Update()
@@ -77,11 +85,10 @@ void Player::Update()
 	TranslateGun();
 	UpdateRayLength();
 	CheckDeath();
+	UpdateRayCollider();
 
 	m_gunRay->setVisible(m_shooting);
 	m_gunRay->setScale(irr::core::vector3df(m_gunRay->getScale().X, m_gunRay->getScale().Y, m_rayLength));
-
-	std::cout << m_collisionResponse->isFalling() << std::endl;
 }
 
 void Player::Reverse()
@@ -164,7 +171,22 @@ void Player::UpdateRayLength()
 	}
 }
 
-void Player::CheckDeath()
+void Player::UpdateRayCollider()
+{
+	if (m_rayCollider->collisionOccurred())
+	{
+		irr::scene::ISceneNode* collideWith = m_rayCollider->getCollisionNode();
+		std::cout << "COLIDE" << std::endl;
+
+		if (collideWith->getID() == 10)
+		{
+			collideWith->setVisible(false);
+			std::cout << "COLIDE WITH CUBE" << std::endl;
+		}
+	}
+}
+
+void Player::CheckDeath() const
 {
 	if (m_cameraComponent->getPosition().Y < PLAYER_MIN_Y_KILL || m_cameraComponent->getPosition().Y > PLAYER_MAX_Y_KILL)
 	{

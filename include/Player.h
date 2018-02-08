@@ -21,7 +21,8 @@ public:
 	void RotateGun();
 	void TranslateGun();
 	void UpdateRayLength();
-	void CheckDeath();
+	void UpdateRayCollider();
+	void CheckDeath() const;
 
 	irr::scene::ICameraSceneNode*		GetCamera() const { return m_cameraComponent; }
 	irr::scene::IAnimatedMeshSceneNode* GetArmsAndGun() const { return m_armsAndGun; }
@@ -35,7 +36,7 @@ private:
 	irr::scene::IAnimatedMeshSceneNode*			m_armsAndGun;
 	irr::scene::IMeshSceneNode*					m_gunRay;
 	CollisionResponse*							m_collisionResponse;
-	irr::scene::IParticleSystemSceneNode*		m_particleSystem;
+	CollisionResponse*							m_rayCollider;
 
 	irr::scene::ILightSceneNode* m_gunLight;
 

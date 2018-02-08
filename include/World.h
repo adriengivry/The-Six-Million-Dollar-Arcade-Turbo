@@ -12,10 +12,12 @@ public:
 
 	irr::scene::ISceneNode*			GetRoot()		const { return m_root; }
 	irr::scene::ITriangleSelector*	GetSelector()	const { return m_selector; }
+	irr::scene::ITriangleSelector*	GetCubeSelector()	const { return m_cubeSelector; }
 
 private:
 	SharedContext*					m_sharedContext;
 	irr::scene::ISceneNode*			m_root;
 	irr::scene::IMeshSceneNode*		m_terrain;
 	irr::scene::ITriangleSelector*	m_selector;
+	irr::scene::ITriangleSelector*	m_cubeSelector;
 };

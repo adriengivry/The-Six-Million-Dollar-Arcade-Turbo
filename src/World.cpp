@@ -44,4 +44,8 @@ void World::InitComponents()
 	m_selector = sceneManager.createOctreeTriangleSelector(q3levelmesh->getMesh(0), m_terrain, 128);
 	m_terrain->setTriangleSelector(m_selector);
 	m_terrain->setPosition(irr::core::vector3df(-1350, -130, -1400));
+
+	auto cube = sceneManager.addAnimatedMeshSceneNode(sceneManager.getMesh("../assets/maps/my_map.OBJ"));
+	cube->setPosition(irr::core::vector3df(100, 50, -60));
+	m_cubeSelector = sceneManager.createTriangleSelector(cube->getMesh(), cube);
 }
