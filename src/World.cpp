@@ -23,6 +23,15 @@ void World::InitComponents()
 
 	// Create World root
 	m_root = sceneManager.addEmptySceneNode();
+
+	irr::video::ITexture* up = m_sharedContext->window->GetDriver()->getTexture("../assets/textures/skybox/up.JPG");
+	irr::video::ITexture* dn = m_sharedContext->window->GetDriver()->getTexture("../assets/textures/skybox/dn.JPG");
+	irr::video::ITexture* lf = m_sharedContext->window->GetDriver()->getTexture("../assets/textures/skybox/lf.JPG");
+	irr::video::ITexture* rt = m_sharedContext->window->GetDriver()->getTexture("../assets/textures/skybox/rt.JPG");
+	irr::video::ITexture* ft = m_sharedContext->window->GetDriver()->getTexture("../assets/textures/skybox/ft.JPG");
+	irr::video::ITexture* bk = m_sharedContext->window->GetDriver()->getTexture("../assets/textures/skybox/bk.JPG");
+
+	sceneManager.addSkyBoxSceneNode(up, dn, lf, rt, ft, bk, m_root);
 	
 	// Add Quake map to filesystem
 	m_sharedContext->window->GetDevice()->getFileSystem()->addFileArchive("../assets/maps/map-20kdm2.pk3");

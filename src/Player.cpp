@@ -61,6 +61,7 @@ void Player::InitComponents()
 	m_gunRay->setPosition(irr::core::vector3df(0, 0, -7));
 	m_gunRay->setScale(irr::core::vector3df(0.5f, 0.5f, 1));
 	m_gunRay->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
+	auto gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.f));
 }
 
 void Player::Update()
