@@ -14,6 +14,7 @@ Terrain::Terrain(SharedContext* p_sharedContext)
 	// Create node
 	m_node = sceneManager.addOctreeSceneNode(m_mesh, nullptr, ID_NotActivable);
 	m_node->setPosition(irr::core::vector3df(0, 0, 0));
+	m_node->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/maps/rockwall.jpg"));
 
 	for (uint8_t i = 0; i < m_node->getMaterialCount(); ++i)
 		m_node->getMaterial(i).Lighting = true;

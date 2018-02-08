@@ -61,7 +61,7 @@ void Player::CreateGun()
 	m_rayNode->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
 	m_rayNode->getMaterial(0).EmissiveColor.set(255, 255, 255, 0);
 	m_rayNode->setVisible(false);
-	m_gunLightNode = sceneManager.addLightSceneNode(m_rayNode, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.7f));
+	m_gunLightNode = sceneManager.addLightSceneNode(m_rayNode, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 1.f));
 }
 
 void Player::Update()
