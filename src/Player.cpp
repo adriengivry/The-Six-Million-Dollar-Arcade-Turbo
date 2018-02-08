@@ -13,6 +13,7 @@ Player::Player(SharedContext* p_sharedContext)
 	m_mouseInverted = false;
 	m_gravityTimer = 0.f;
 	m_rayLength = 0.f;
+	m_fallingTimer = 0.f;
 
 	CreateCamera();
 	CreateGun();
@@ -27,7 +28,7 @@ void Player::CreateCamera()
 
 	// Camera Node
 	m_cameraNode = sceneManager.addCameraSceneNodeFPS(nullptr, 100.f, 0.3f, -1, nullptr, 0, true, 4.f);
-	m_cameraNode->setPosition(irr::core::vector3df(600, 200, 300));
+	m_cameraNode->setPosition(irr::core::vector3df(500, 100, 300));
 	m_cameraNode->setTarget(irr::core::vector3df(-70, 30, -60));
 
 	// Camera Animator
@@ -37,7 +38,7 @@ void Player::CreateCamera()
 
 	// Camera Collider
 	m_cameraCollider = sceneManager.createCollisionResponseAnimator(m_sharedContext->scene->GetTerrain()->GetCollider(), m_cameraNode);
-	m_cameraCollider->setEllipsoidRadius(irr::core::vector3df(15, 30, 15));
+	m_cameraCollider->setEllipsoidRadius(irr::core::vector3df(30, 60, 30));
 	m_cameraCollider->setGravity(irr::core::vector3df(0, m_gravity, 0));
 	m_cameraNode->addAnimator(m_cameraCollider);
 }
@@ -61,12 +62,17 @@ void Player::CreateGun()
 	m_rayNode->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
 	m_rayNode->getMaterial(0).EmissiveColor.set(255, 255, 255, 0);
 	m_rayNode->setVisible(false);
-	m_gunLightNode = sceneManager.addLightSceneNode(m_rayNode, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 1.f), 5);
+	m_gunLightNode = sceneManager.addLightSceneNode(m_rayNode, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 1.f), 50);
 }
 
 void Player::Update()
 {
 	m_gravityTimer += m_sharedContext->deltaTime;
+
+	if (m_cameraCollider->isFalling())
+		m_fallingTimer += m_sharedContext->deltaTime;
+	else
+		m_fallingTimer = 0.f;
 
 	UpdateGun();
 	UpdateRay();
@@ -208,4 +214,9 @@ void Player::CheckDeath() const
 bool Player::IsShooting() const
 {
 	return m_sharedContext->eventManager->MouseLeftPressed();
+}
+
+bool Player::CanReverse() const
+{
+	return m_fallingTimer <= 0.1f;
 }

@@ -12,8 +12,9 @@ Terrain::Terrain(SharedContext* p_sharedContext)
 	m_mesh = sceneManager.getMesh("../assets/maps/map.OBJ");
 
 	// Create node
-	m_node = sceneManager.addOctreeSceneNode(m_mesh, nullptr, ID_NotActivable);
+	m_node = sceneManager.addMeshSceneNode(m_mesh, nullptr, ID_NotActivable);
 	m_node->setPosition(irr::core::vector3df(0, 0, 0));
+	m_node->setScale(irr::core::vector3df(0.6, 0.6, 0.6));
 
 	for (uint8_t i = 0; i < m_node->getMaterialCount(); ++i)
 	{

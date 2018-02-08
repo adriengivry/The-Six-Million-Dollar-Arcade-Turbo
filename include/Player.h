@@ -27,6 +27,7 @@ public:
 	void CheckDeath() const;
 
 	bool IsShooting() const;
+	bool CanReverse() const;
 
 	irr::scene::ICameraSceneNode*						GetCameraNode()		const { return m_cameraNode; }
 	irr::scene::IAnimatedMeshSceneNode*					GetGunNode()		const { return m_gunNode; }
@@ -48,6 +49,7 @@ private:
 	irr::f32 m_gunRotation;
 	irr::f32 m_gunTranslation;
 	irr::f32 m_rayLength;
+	irr::f32 m_fallingTimer;
 
 	bool m_mouseInverted;	
 };
