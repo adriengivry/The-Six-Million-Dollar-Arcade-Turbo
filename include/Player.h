@@ -2,8 +2,6 @@
 #include <ICameraSceneNode.h>
 #include "SharedContext.h"
 
-typedef irr::scene::ISceneNodeAnimatorCollisionResponse CollisionResponse;
-
 class Player
 {
 public:
@@ -11,44 +9,45 @@ public:
 	static const irr::s32 PLAYER_MAX_Y_KILL	= 2000.f;
 
 	explicit Player(SharedContext* p_sharedContext);
-	~Player();
+	~Player() = default;
 
-	void InitComponents();
+	void CreateCamera();
+	void CreateGun();
+
 	void Update();
+	void UpdateGun();
+	void UpdateRay();
 
-	void Reverse();
 	void RotateGun();
 	void TranslateGun();
 	void UpdateRayLength();
 	void UpdateRayCollider();
+
+	void Reverse();
 	void CheckDeath() const;
 
-	irr::scene::ICameraSceneNode*		GetCamera() const { return m_cameraComponent; }
-	irr::scene::IAnimatedMeshSceneNode* GetArmsAndGun() const { return m_armsAndGun; }
-	CollisionResponse*					GetCollider() const { return m_collisionResponse; }
+	bool IsShooting() const;
+
+	irr::scene::ICameraSceneNode*						GetCameraNode()		const { return m_cameraNode; }
+	irr::scene::IAnimatedMeshSceneNode*					GetGunNode()		const { return m_gunNode; }
+	irr::scene::ISceneNodeAnimatorCollisionResponse*	GetCollider()		const { return m_cameraCollider; }
 
 private:
-	SharedContext*								m_sharedContext;
-	irr::scene::ISceneNode*						m_root;
-	irr::scene::ICameraSceneNode*				m_cameraComponent;
-	irr::scene::ISceneNodeAnimatorCameraFPS*	m_cameraAnimator;
-	irr::scene::IAnimatedMeshSceneNode*			m_armsAndGun;
-	irr::scene::IMeshSceneNode*					m_gunRay;
-	CollisionResponse*							m_collisionResponse;
-	CollisionResponse*							m_rayCollider;
+	SharedContext* m_sharedContext;
 
-	irr::scene::ILightSceneNode* m_gunLight;
+	irr::scene::ICameraSceneNode*			m_cameraNode;
+	irr::scene::IAnimatedMeshSceneNode*		m_gunNode;
+	irr::scene::IAnimatedMeshSceneNode*		m_rayNode;
+	irr::scene::ILightSceneNode*			m_gunLightNode;
+
+	irr::scene::ISceneNodeAnimatorCollisionResponse*	m_cameraCollider;
+	irr::scene::ISceneNodeAnimatorCameraFPS*			m_cameraAnimator;
 
 	irr::f32 m_gravity;
 	irr::f32 m_gravityTimer;
 	irr::f32 m_gunRotation;
 	irr::f32 m_gunTranslation;
-
-	bool m_mouseInverted;
-	bool m_invertEnd;
-	bool m_reversing;
-
-	bool m_shooting;
-
 	irr::f32 m_rayLength;
+
+	bool m_mouseInverted;	
 };

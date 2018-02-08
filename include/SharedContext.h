@@ -8,6 +8,12 @@ class Scene;
 
 typedef irr::scene::ISceneManager SceneManager;
 
+enum
+{
+	ID_NotActivable = 0,
+	ID_Activable = 1 << 0,
+};
+
 struct SharedContext
 {
 	GameInfo		gameInfo;

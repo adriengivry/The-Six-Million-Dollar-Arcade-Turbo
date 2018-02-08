@@ -1,6 +1,6 @@
 #include "EventManager.h"
 #include "Scene.h"
-#include "World.h"
+#include "Terrain.h"
 #include "Player.h"
 #include <iostream>
 

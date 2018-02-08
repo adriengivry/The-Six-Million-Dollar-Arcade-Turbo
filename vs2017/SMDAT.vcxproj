@@ -24,9 +24,10 @@
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\Main.cpp" />
     <ClCompile Include="..\src\Scene.cpp" />
+    <ClCompile Include="..\src\Skybox.cpp" />
     <ClCompile Include="..\src\UserInterface.cpp" />
     <ClCompile Include="..\src\Window.cpp" />
-    <ClCompile Include="..\src\World.cpp" />
+    <ClCompile Include="..\src\Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Player.h" />
@@ -35,10 +36,11 @@
     <ClInclude Include="..\include\GameInfo.h" />
     <ClInclude Include="..\include\Scene.h" />
     <ClInclude Include="..\include\SharedContext.h" />
+    <ClInclude Include="..\include\Skybox.h" />
     <ClInclude Include="..\include\UserInterface.h" />
     <ClInclude Include="..\include\Utilities.h" />
     <ClInclude Include="..\include\Window.h" />
-    <ClInclude Include="..\include\World.h" />
+    <ClInclude Include="..\include\Terrain.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
