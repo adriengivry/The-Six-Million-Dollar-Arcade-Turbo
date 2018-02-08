@@ -17,7 +17,8 @@ public:
 
 	void Reverse();
 	void RotateGun();
-	void HandleEvents();
+	void TranslateGun();
+	void UpdateRayLength();
 
 	irr::scene::ICameraSceneNode*		GetCamera() const { return m_cameraComponent; }
 	irr::scene::IAnimatedMeshSceneNode* GetArmsAndGun() const { return m_armsAndGun; }
@@ -33,12 +34,12 @@ private:
 	CollisionResponse*							m_collisionResponse;
 	irr::scene::IParticleSystemSceneNode*		m_particleSystem;
 
-	irr::scene::IParticleCylinderEmitter* m_emitter;
 	irr::scene::ILightSceneNode* m_gunLight;
 
 	irr::f32 m_gravity;
 	irr::f32 m_gravityTimer;
 	irr::f32 m_gunRotation;
+	irr::f32 m_gunTranslation;
 
 	bool m_mouseInverted;
 	bool m_invertEnd;

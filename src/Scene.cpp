@@ -15,6 +15,8 @@ void Scene::InitScene()
 {
 	m_world = new World(m_sharedContext);
 	m_player = new Player(m_sharedContext);
+
+	m_sceneManager.setAmbientLight(irr::video::SColorf(1.0, 1.0, 1.0, 0.0));
 }
 
 void Scene::Update()
