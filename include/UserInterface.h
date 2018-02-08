@@ -19,7 +19,5 @@ private:
 
 	irr::gui::IGUIEnvironment*		m_gui;
 	irr::gui::IGUIFont*				m_font;
-	irr::scene::ITextSceneNode*		m_text;
-	irr::scene::ISceneManager*		m_smgr;
-
+	irr::gui::IGUISkin*				m_skin;
 };
