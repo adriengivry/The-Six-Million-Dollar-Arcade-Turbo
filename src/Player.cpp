@@ -64,7 +64,7 @@ void Player::InitComponents()
 	m_gunRay->setScale(irr::core::vector3df(0.5f, 0.5f, 1));
 	m_gunRay->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
 	m_gunRay->getMaterial(0).EmissiveColor.set(255, 255, 255, 0);
-	auto gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.7f));
+	m_gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.7f));
 
 	// Ray collider
 	m_rayCollider = sceneManager.createCollisionResponseAnimator(nullptr, nullptr);
