@@ -14,11 +14,17 @@ UserInterface::UserInterface(SharedContext* p_sharedContext)
 
 	m_gui = p_sharedContext->window->GetDevice()->getGUIEnvironment();
 
+	m_skin = m_gui->getSkin();
+
 	m_font = m_gui->getFont("../assets/fonts/fontcourier.bmp");
 
+	m_skin->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 255, 255, 255));
 	
-	m_text = m_sharedContext->window->GetDevice()->getSceneManager()->addTextSceneNode(m_font, L"SCORE",
-		irr::video::SColor(255, 255, 255, 255), 0, irr::core::vector3df(0, 0, 0));
+	m_skin->setFont(m_font);
+
+	m_gui->addStaticText(L"SCORE:", irr::core::rect<irr::s32>(30, 30, 200, 50));
+
+	m_gui->addStaticText(irr::core::stringw(m_sharedContext->gameInfo.defaultScore).c_str(), irr::core::rect<irr::s32>(100, 30, 200, 50));
 }
 
 UserInterface::~UserInterface()
@@ -40,4 +46,8 @@ void UserInterface::Draw()
 
 void UserInterface::Update()
 {
+	/*while (m_sharedContext->gameInfo.defaultScore > 0.0f)
+	{
+		m_sharedContext->gameInfo.defaultScore -= 1 * m_sharedContext->deltaTime;
+	}*/
 }
