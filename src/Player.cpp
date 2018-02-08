@@ -27,7 +27,7 @@ void Player::CreateCamera()
 
 	// Camera Node
 	m_cameraNode = sceneManager.addCameraSceneNodeFPS(nullptr, 100.f, 0.3f, -1, nullptr, 0, true, 4.f);
-	m_cameraNode->setPosition(irr::core::vector3df(50, 50, -60));
+	m_cameraNode->setPosition(irr::core::vector3df(600, 200, 300));
 	m_cameraNode->setTarget(irr::core::vector3df(-70, 30, -60));
 
 	// Camera Animator
@@ -89,8 +89,8 @@ void Player::Reverse()
 		m_gravity *= -1;
 		m_cameraCollider->setGravity(irr::core::vector3df(0, m_gravity, 0));
 		
-		// m_cameraNode->setUpVector(m_cameraNode->getUpVector() * -1);
-		// m_cameraAnimator->setInvertMouse(m_mouseInverted);
+		m_cameraNode->setUpVector(m_cameraNode->getUpVector() * -1);
+		m_cameraAnimator->setInvertMouse(m_mouseInverted);
 	}
 }
 

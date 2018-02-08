@@ -1,1 +1,15 @@
-﻿
+﻿newmtl /Game/StarterContent/Materials/M_Basic_Wall_M_Basic_Wall
+	map_Kd M_Basic_Wall_M_Basic_Wall_D.bmp
+	map_Ks M_Basic_Wall_M_Basic_Wall_S.bmp
+	bump M_Basic_Wall_M_Basic_Wall_N.bmp
+
+newmtl /Game/StarterContent/Props/Materials/M_MaterialSphere_Plain_M_MaterialSphere_Plain
+	map_Kd M_MaterialSphere_Plain_M_MaterialSphere_Plain_D.bmp
+	map_Ks M_MaterialSphere_Plain_M_MaterialSphere_Plain_S.bmp
+	bump M_MaterialSphere_Plain_M_MaterialSphere_Plain_N.bmp
+
+newmtl /Game/StarterContent/Props/Materials/M_MaterialSphere_M_MaterialSphere
+	map_Kd M_MaterialSphere_M_MaterialSphere_D.bmp
+	map_Ks M_MaterialSphere_M_MaterialSphere_S.bmp
+	bump M_MaterialSphere_M_MaterialSphere_N.bmp
+
