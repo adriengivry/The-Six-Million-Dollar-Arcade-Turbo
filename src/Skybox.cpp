@@ -13,7 +13,7 @@ Skybox::Skybox(SharedContext* p_sharedContext)
 
 	m_skyboxNode = p_sharedContext->scene->GetSceneManager().addSkyBoxSceneNode(up, dn, lf, rt, ft, bk, nullptr);
 
-	m_sunNode = p_sharedContext->scene->GetSceneManager().addLightSceneNode(nullptr, irr::core::vector3df(10000, 10000, 0), irr::video::SColorf(1.f, 1.f, 1.f, 1.f), 10000);
+	m_sunNode = p_sharedContext->scene->GetSceneManager().addLightSceneNode(nullptr, irr::core::vector3df(1000, 1000, 0), irr::video::SColorf(1.f, 1.f, 1.f, 1.f), 10000);
 	m_sunNode->getLightData().Direction.set(-0.5f, -0.5f, 0);
 	m_sunNode->getLightData().AmbientColor.set(1.f, 1.f, 1.f, 0.f);
 	m_sunNode->enableCastShadow(true);

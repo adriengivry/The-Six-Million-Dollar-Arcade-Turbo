@@ -18,7 +18,7 @@ public:
 	Player*						GetPlayer()			const { return m_player; }
 
 	void InitScene();
-	void Update();
+	void Update() const;
 private:
 	SharedContext*				m_sharedContext;
 	irr::scene::ISceneManager&	m_sceneManager;

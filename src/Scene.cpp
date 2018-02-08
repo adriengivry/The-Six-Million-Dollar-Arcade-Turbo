@@ -17,7 +17,7 @@ void Scene::InitScene()
 	m_player = new Player(m_sharedContext);
 }
 
-void Scene::Update()
+void Scene::Update() const
 {
 	m_player->Update();
 }

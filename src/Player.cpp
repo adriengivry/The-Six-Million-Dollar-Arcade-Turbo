@@ -37,7 +37,7 @@ void Player::CreateCamera()
 
 	// Camera Collider
 	m_cameraCollider = sceneManager.createCollisionResponseAnimator(m_sharedContext->scene->GetTerrain()->GetCollider(), m_cameraNode);
-	m_cameraCollider->setEllipsoidRadius(irr::core::vector3df(30, 50, 30));
+	m_cameraCollider->setEllipsoidRadius(irr::core::vector3df(15, 30, 15));
 	m_cameraCollider->setGravity(irr::core::vector3df(0, m_gravity, 0));
 	m_cameraNode->addAnimator(m_cameraCollider);
 }
@@ -88,8 +88,9 @@ void Player::Reverse()
 		m_gravityTimer = 0.f;
 		m_gravity *= -1;
 		m_cameraCollider->setGravity(irr::core::vector3df(0, m_gravity, 0));
-		m_cameraNode->setUpVector(m_cameraNode->getUpVector() * -1);
-		m_cameraAnimator->setInvertMouse(m_mouseInverted);
+		
+		// m_cameraNode->setUpVector(m_cameraNode->getUpVector() * -1);
+		// m_cameraAnimator->setInvertMouse(m_mouseInverted);
 	}
 }
 
