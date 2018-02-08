@@ -33,26 +33,34 @@ void Player::InitComponents()
 	const irr::s32	fpsKeyMapSize	= m_sharedContext->eventManager->GetKeyMapSize("FPS_CAMERA");
 
 	// Camera Component
-	m_cameraComponent = sceneManager.addCameraSceneNodeFPS(m_root, 100.0f, 0.3f, -1, fpsKeyMap, fpsKeyMapSize, true, 1.f);
+	m_cameraComponent = sceneManager.addCameraSceneNodeFPS(m_root);
+	m_cameraComponent->setPosition(irr::core::vector3df(50, 50, -60));
+	m_cameraComponent->setTarget(irr::core::vector3df(-70, 30, -60));
 
 	// Camera Animator
 	m_cameraAnimator = static_cast<irr::scene::ISceneNodeAnimatorCameraFPS*>(*m_cameraComponent->getAnimators().begin());
+	m_cameraAnimator->setKeyMap(fpsKeyMap, fpsKeyMapSize);
+	m_cameraAnimator->setVerticalMovement(false);
+	m_cameraAnimator->setMoveSpeed(.3f);
 
 	// Camera Collider
 	m_collisionResponse = sceneManager.createCollisionResponseAnimator(m_sharedContext->scene->GetWorld()->GetSelector(), m_cameraComponent);
+	m_collisionResponse->setEllipsoidRadius(irr::core::vector3df(30, 50, 30));
 	m_collisionResponse->setGravity(irr::core::vector3df(0, m_gravity, 0));
 	m_cameraComponent->addAnimator(m_collisionResponse);
 
 	// Animated FPS arms
-	m_animatedMeshComp = sceneManager.addAnimatedMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/gun.obj").c_str()), m_cameraComponent);
-	m_animatedMeshComp->setRotation(irr::core::vector3df(0, 180, 0));
-	m_animatedMeshComp->setPosition(irr::core::vector3df(7, -10, 20));
+	m_armsAndGun = sceneManager.addAnimatedMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/gun.obj").c_str()), m_cameraComponent);
+	m_armsAndGun->setRotation(irr::core::vector3df(0, 180, 0));
+	m_armsAndGun->setPosition(irr::core::vector3df(7, -10, 20));
 
 	const irr::core::vector3df gunExitPoint(8, -11, 30);
 
 	// gun ray
-	m_gunRay = sceneManager.addMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/ray.obj").c_str()), m_cameraComponent);
-	m_gunRay->setPosition(gunExitPoint);
+	m_gunRay = sceneManager.addMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/ray.obj").c_str()), m_armsAndGun);
+	m_gunRay->setRotation(irr::core::vector3df(0, 180, 0));
+	m_gunRay->setPosition(irr::core::vector3df(0, 0, -7));
+	m_gunRay->setScale(irr::core::vector3df(0.5f, 0.5f, 1));
 	m_gunRay->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/meshes/purmesh.jpg"));
 
 	// Gun ray particules
@@ -79,9 +87,6 @@ void Player::InitComponents()
 
 	affectorFadeOut->drop();
 	affectorGravity->drop();
-
-	m_gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0),
-		irr::video::SColorf(0.4f, 0.4f, 0.6f, 0.0f), 180.f);
 }
 
 void Player::Update()
@@ -103,7 +108,7 @@ void Player::Update()
 	}
 
 	m_emitter->setLength(m_rayLength);
-	m_gunRay->setScale(irr::core::vector3df(1, 1, m_rayLength));
+	m_gunRay->setScale(irr::core::vector3df(m_gunRay->getScale().X, m_gunRay->getScale().Y, m_rayLength));
 }
 
 void Player::Reverse()
@@ -120,7 +125,7 @@ void Player::Reverse()
 
 void Player::RotateGun()
 {
-	m_animatedMeshComp->setRotation(m_animatedMeshComp->getRotation() - irr::core::vector3df(0, 0, m_gunRotation));
+	m_armsAndGun->setRotation(m_armsAndGun->getRotation() - irr::core::vector3df(0, 0, m_gunRotation));
 
 	if (m_gravity > 0)
 	{
@@ -143,7 +148,7 @@ void Player::RotateGun()
 		}
 	}
 
-	m_animatedMeshComp->setRotation(m_animatedMeshComp->getRotation() + irr::core::vector3df(0, 0, m_gunRotation));
+	m_armsAndGun->setRotation(m_armsAndGun->getRotation() + irr::core::vector3df(0, 0, m_gunRotation));
 }
 
 void Player::HandleEvents()

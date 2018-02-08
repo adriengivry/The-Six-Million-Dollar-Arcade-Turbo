@@ -21,39 +21,25 @@ void World::InitComponents()
 {
 	irr::scene::ISceneManager& sceneManager = m_sharedContext->scene->GetSceneManager();
 
+	// Create World root
 	m_root = sceneManager.addEmptySceneNode();
-	m_selector = sceneManager.createMetaTriangleSelector();
+	
+	// Add Quake map to filesystem
+	m_sharedContext->window->GetDevice()->getFileSystem()->addFileArchive("../assets/maps/map-20kdm2.pk3");
 
-	auto cube1 = sceneManager.addCubeSceneNode(300, m_root);
-	cube1->setPosition(irr::core::vector3df(0, -400, 0));
-	cube1->setScale(irr::core::vector3df(2, 1, 20));
-	cube1->setMaterialFlag(irr::video::EMF_LIGHTING, true);
+	// Load Quake map into an AnimatedMesh
+	irr::scene::IAnimatedMesh* q3levelmesh = sceneManager.getMesh("20kdm2.bsp");
 
-	auto cube2 = sceneManager.addCubeSceneNode(300, m_root);
-	cube2->setPosition(irr::core::vector3df(0, 400, 0));
-	cube2->setScale(irr::core::vector3df(2, 1, 20));
-	cube2->setMaterialFlag(irr::video::EMF_LIGHTING, true);
-
-	auto cube3 = sceneManager.addCubeSceneNode(300, m_root);
-	cube3->setPosition(irr::core::vector3df(-400, 0, 0));
-	cube3->setRotation(irr::core::vector3df(0, 0, 90));
-	cube3->setScale(irr::core::vector3df(2, 1, 20));
-	cube3->setMaterialFlag(irr::video::EMF_LIGHTING, true);
-
-	auto cube4 = sceneManager.addCubeSceneNode(300, m_root);
-	cube4->setPosition(irr::core::vector3df(400, 0, 0));
-	cube4->setRotation(irr::core::vector3df(0, 0, 90));
-	cube4->setScale(irr::core::vector3df(2, 1, 20));
-
-	AddToWorldSelector(sceneManager.createTriangleSelectorFromBoundingBox(cube1));
-	AddToWorldSelector(sceneManager.createTriangleSelectorFromBoundingBox(cube2));
-	AddToWorldSelector(sceneManager.createTriangleSelectorFromBoundingBox(cube3));
-	AddToWorldSelector(sceneManager.createTriangleSelectorFromBoundingBox(cube4));
+	// Create the terrain and his triangleSelector
+	m_terrain = sceneManager.addOctreeSceneNode(q3levelmesh->getMesh(0), m_root, 1);
+	m_selector = sceneManager.createOctreeTriangleSelector(q3levelmesh->getMesh(0), m_terrain, 128);
+	m_terrain->setTriangleSelector(m_selector);
+	m_terrain->setPosition(irr::core::vector3df(-1350, -130, -1400));
 }
 
 void World::AddToWorldSelector(irr::scene::ITriangleSelector* p_selector) const
 {
-	m_selector->addTriangleSelector(p_selector);
+	
 }
 
 void World::Update()

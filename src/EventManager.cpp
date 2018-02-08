@@ -59,15 +59,15 @@ bool EventManager::OnEvent(const irr::SEvent& event)
 	{
 		switch (event.MouseInput.Event)
 		{
-		default: break;
 		case irr::EMIE_LMOUSE_LEFT_UP:
 			m_mouseLeft = false;
-			std::cout << m_mouseLeft << std::endl;
 			break;
 
 		case irr::EMIE_LMOUSE_PRESSED_DOWN:
 			m_mouseLeft = true;
-			std::cout << m_mouseLeft << std::endl;
+			break;
+
+		default:
 			break;
 		}
 	}

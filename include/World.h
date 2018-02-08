@@ -1,8 +1,6 @@
 #pragma once
 #include "SharedContext.h"
 
-typedef irr::scene::IMetaTriangleSelector Collider;
-
 class World
 {
 public:
@@ -13,13 +11,14 @@ public:
 	void InitComponents();
 	void AddToWorldSelector(irr::scene::ITriangleSelector* p_selector) const;
 
-	irr::scene::ISceneNode*	GetRoot()		const { return m_root; }
-	Collider*				GetSelector()	const { return m_selector; }
+	irr::scene::ISceneNode*			GetRoot()		const { return m_root; }
+	irr::scene::ITriangleSelector*	GetSelector()	const { return m_selector; }
 
 	void Update();
 
 private:
-	SharedContext*				m_sharedContext;
-	irr::scene::ISceneNode*		m_root;
-	Collider*					m_selector;
+	SharedContext*					m_sharedContext;
+	irr::scene::ISceneNode*			m_root;
+	irr::scene::IMeshSceneNode*		m_terrain;
+	irr::scene::ITriangleSelector*	m_selector;
 };

@@ -7,7 +7,7 @@ typedef irr::scene::ISceneNodeAnimatorCollisionResponse CollisionResponse;
 class Player
 {
 public:
-	static const irr::s32 PLAYER_GRAVITY = -3;
+	static const irr::s32 PLAYER_GRAVITY = -10;
 
 	explicit Player(SharedContext* p_sharedContext);
 	~Player();
@@ -20,7 +20,7 @@ public:
 	void HandleEvents();
 
 	irr::scene::ICameraSceneNode*		GetCamera() const { return m_cameraComponent; }
-	irr::scene::IAnimatedMeshSceneNode* GetAnimatedMesh() const { return m_animatedMeshComp; }
+	irr::scene::IAnimatedMeshSceneNode* GetArmsAndGun() const { return m_armsAndGun; }
 	CollisionResponse*					GetCollider() const { return m_collisionResponse; }
 
 private:
@@ -28,7 +28,7 @@ private:
 	irr::scene::ISceneNode*						m_root;
 	irr::scene::ICameraSceneNode*				m_cameraComponent;
 	irr::scene::ISceneNodeAnimatorCameraFPS*	m_cameraAnimator;
-	irr::scene::IAnimatedMeshSceneNode*			m_animatedMeshComp;
+	irr::scene::IAnimatedMeshSceneNode*			m_armsAndGun;
 	irr::scene::IMeshSceneNode*					m_gunRay;
 	CollisionResponse*							m_collisionResponse;
 	irr::scene::IParticleSystemSceneNode*		m_particleSystem;
