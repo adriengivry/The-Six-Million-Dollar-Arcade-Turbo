@@ -54,6 +54,8 @@ void Player::InitComponents()
 	m_armsAndGun = sceneManager.addAnimatedMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/gun.obj").c_str()), m_cameraComponent);
 	m_armsAndGun->setRotation(irr::core::vector3df(0, 180, 0));
 	m_armsAndGun->setPosition(irr::core::vector3df(5, 0, 15));
+	m_armsAndGun->getMaterial(0).Shininess = 120.f;
+	m_armsAndGun->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/gun_map.png"));
 
 	// gun ray
 	m_gunRay = sceneManager.addMeshSceneNode(sceneManager.getMesh(Utils::LoadAsset("meshes/ray.obj").c_str()), m_armsAndGun);
@@ -61,7 +63,8 @@ void Player::InitComponents()
 	m_gunRay->setPosition(irr::core::vector3df(0, 0, -7));
 	m_gunRay->setScale(irr::core::vector3df(0.5f, 0.5f, 1));
 	m_gunRay->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
-	auto gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.3f));
+	m_gunRay->getMaterial(0).EmissiveColor.set(255, 255, 255, 0);
+	auto gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.7f));
 }
 
 void Player::Update()
