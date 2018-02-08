@@ -1,0 +1,5 @@
+﻿newmtl /Game/StarterContent/Materials/M_Basic_Floor_M_Basic_Floor
+	map_Kd M_Basic_Floor_M_Basic_Floor_D.bmp
+	map_Ks M_Basic_Floor_M_Basic_Floor_S.bmp
+	bump M_Basic_Floor_M_Basic_Floor_N.bmp
+
