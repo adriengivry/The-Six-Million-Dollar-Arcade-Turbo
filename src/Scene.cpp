@@ -22,6 +22,4 @@ void Scene::InitScene()
 void Scene::Update()
 {
 	m_player->Update();
-	m_world->Update();
-	
 }

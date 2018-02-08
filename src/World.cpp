@@ -40,17 +40,8 @@ void World::InitComponents()
 	irr::scene::IAnimatedMesh* q3levelmesh = sceneManager.getMesh("20kdm2.bsp");
 
 	// Create the terrain and his triangleSelector
-	m_terrain = sceneManager.addOctreeSceneNode(q3levelmesh->getMesh(0), m_root, 1);
+	m_terrain = sceneManager.addOctreeSceneNode(q3levelmesh->getMesh(0), m_root);
 	m_selector = sceneManager.createOctreeTriangleSelector(q3levelmesh->getMesh(0), m_terrain, 128);
 	m_terrain->setTriangleSelector(m_selector);
 	m_terrain->setPosition(irr::core::vector3df(-1350, -130, -1400));
-}
-
-void World::AddToWorldSelector(irr::scene::ITriangleSelector* p_selector) const
-{
-	
-}
-
-void World::Update()
-{
 }

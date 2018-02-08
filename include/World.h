@@ -9,12 +9,9 @@ public:
 	~World();
 
 	void InitComponents();
-	void AddToWorldSelector(irr::scene::ITriangleSelector* p_selector) const;
 
 	irr::scene::ISceneNode*			GetRoot()		const { return m_root; }
 	irr::scene::ITriangleSelector*	GetSelector()	const { return m_selector; }
-
-	void Update();
 
 private:
 	SharedContext*					m_sharedContext;

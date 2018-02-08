@@ -33,7 +33,7 @@ void Player::InitComponents()
 	const irr::s32	fpsKeyMapSize	= m_sharedContext->eventManager->GetKeyMapSize("FPS_CAMERA");
 
 	// Camera Component
-	m_cameraComponent = sceneManager.addCameraSceneNodeFPS(m_root,100.f, 0.3f, -1, 0, 0, true, 3.f);
+	m_cameraComponent = sceneManager.addCameraSceneNodeFPS(m_root, 100.f, 0.3f, -1, 0, 0, true, 4.f);
 	m_cameraComponent->setPosition(irr::core::vector3df(50, 50, -60));
 	m_cameraComponent->setTarget(irr::core::vector3df(-70, 30, -60));
 
@@ -61,7 +61,7 @@ void Player::InitComponents()
 	m_gunRay->setPosition(irr::core::vector3df(0, 0, -7));
 	m_gunRay->setScale(irr::core::vector3df(0.5f, 0.5f, 1));
 	m_gunRay->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
-	auto gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.f));
+	auto gunLight = sceneManager.addLightSceneNode(m_gunRay, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 0.3f));
 }
 
 void Player::Update()
@@ -73,9 +73,12 @@ void Player::Update()
 	RotateGun();
 	TranslateGun();
 	UpdateRayLength();
+	CheckDeath();
 
 	m_gunRay->setVisible(m_shooting);
 	m_gunRay->setScale(irr::core::vector3df(m_gunRay->getScale().X, m_gunRay->getScale().Y, m_rayLength));
+
+	std::cout << m_collisionResponse->isFalling() << std::endl;
 }
 
 void Player::Reverse()
@@ -155,5 +158,13 @@ void Player::UpdateRayLength()
 	else
 	{
 		m_rayLength = 0;
+	}
+}
+
+void Player::CheckDeath()
+{
+	if (m_cameraComponent->getPosition().Y < PLAYER_MIN_Y_KILL || m_cameraComponent->getPosition().Y > PLAYER_MAX_Y_KILL)
+	{
+		exit(0);
 	}
 }
