@@ -5,7 +5,7 @@
 
 struct GameInfo
 {
-	GameInfo() {}
+	GameInfo() { Reset(); }
 
 	void Reset()
 	{

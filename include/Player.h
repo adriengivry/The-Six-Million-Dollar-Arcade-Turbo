@@ -7,7 +7,6 @@ typedef irr::scene::ISceneNodeAnimatorCollisionResponse CollisionResponse;
 class Player
 {
 public:
-	static const irr::s32 PLAYER_GRAVITY	= -9.81;
 	static const irr::s32 PLAYER_MIN_Y_KILL = -2000.f;
 	static const irr::s32 PLAYER_MAX_Y_KILL	= 2000.f;
 

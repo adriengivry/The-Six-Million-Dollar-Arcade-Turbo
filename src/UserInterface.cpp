@@ -24,7 +24,7 @@ UserInterface::UserInterface(SharedContext* p_sharedContext)
 
 	m_gui->addStaticText(L"SCORE:", irr::core::rect<irr::s32>(30, 30, 200, 50));
 
-	m_gui->addStaticText(irr::core::stringw(m_sharedContext->gameInfo.defaultScore).c_str(), irr::core::rect<irr::s32>(100, 30, 200, 50));
+	m_scoreText = m_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 30, 200, 50));
 }
 
 UserInterface::~UserInterface()
@@ -46,8 +46,8 @@ void UserInterface::Draw()
 
 void UserInterface::Update()
 {
-	/*while (m_sharedContext->gameInfo.defaultScore > 0.0f)
-	{
-		m_sharedContext->gameInfo.defaultScore -= 1 * m_sharedContext->deltaTime;
-	}*/
+	if (m_sharedContext->gameInfo.currentScore > 0.f)
+		m_sharedContext->gameInfo.currentScore -= 10.f * m_sharedContext->deltaTime;
+
+	m_scoreText->setText(irr::core::stringw(static_cast<irr::u32>(m_sharedContext->gameInfo.currentScore)).c_str());
 }

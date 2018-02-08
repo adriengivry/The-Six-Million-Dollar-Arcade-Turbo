@@ -8,7 +8,7 @@
 Player::Player(SharedContext* p_sharedContext)
 {
 	m_sharedContext = p_sharedContext;
-	m_gravity = PLAYER_GRAVITY;
+	m_gravity = -9.81;
 	m_gunRotation = 0.f;
 	m_mouseInverted = false;
 	m_invertEnd = true;
@@ -95,11 +95,14 @@ void Player::Reverse()
 {
 	if (m_gravityTimer >= 0.5f)
 	{
+		m_mouseInverted = !m_mouseInverted;
 		m_reversing = true;
 		m_invertEnd = false;
 		m_gravityTimer = 0.f;
 		m_gravity *= -1;
 		m_collisionResponse->setGravity(irr::core::vector3df(0, m_gravity, 0));
+		m_cameraComponent->setUpVector(m_cameraComponent->getUpVector() * -1);
+		m_cameraAnimator->setInvertMouse(m_mouseInverted);
 	}
 }
 
@@ -188,7 +191,9 @@ void Player::UpdateRayCollider()
 
 void Player::CheckDeath() const
 {
-	if (m_cameraComponent->getPosition().Y < PLAYER_MIN_Y_KILL || m_cameraComponent->getPosition().Y > PLAYER_MAX_Y_KILL)
+	if (m_cameraComponent->getPosition().Y < PLAYER_MIN_Y_KILL ||
+		m_cameraComponent->getPosition().Y > PLAYER_MAX_Y_KILL ||
+		m_sharedContext->gameInfo.currentScore == 0)
 	{
 		exit(0);
 	}
