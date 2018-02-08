@@ -26,7 +26,7 @@ void Player::CreateCamera()
 	const irr::s32	fpsKeyMapSize = m_sharedContext->eventManager->GetKeyMapSize("FPS_CAMERA");
 
 	// Camera Node
-	m_cameraNode = sceneManager.addCameraSceneNodeFPS(nullptr, 100.f, 0.3f, -1, 0, 0, true, 4.f);
+	m_cameraNode = sceneManager.addCameraSceneNodeFPS(nullptr, 100.f, 0.3f, -1, nullptr, 0, true, 4.f);
 	m_cameraNode->setPosition(irr::core::vector3df(50, 50, -60));
 	m_cameraNode->setTarget(irr::core::vector3df(-70, 30, -60));
 
@@ -61,7 +61,7 @@ void Player::CreateGun()
 	m_rayNode->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
 	m_rayNode->getMaterial(0).EmissiveColor.set(255, 255, 255, 0);
 	m_rayNode->setVisible(false);
-	m_gunLightNode = sceneManager.addLightSceneNode(m_rayNode, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 1.f));
+	m_gunLightNode = sceneManager.addLightSceneNode(m_rayNode, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 1.f), 5);
 }
 
 void Player::Update()
