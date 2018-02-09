@@ -16,8 +16,8 @@ void Scene::InitScene()
 	m_skybox = new Skybox(m_sharedContext);
 	m_terrain = new Terrain(m_sharedContext);
 
-	m_breakables.push_back(new Breakable(m_sharedContext, irr::core::vector3df(-20, -10, 430)));
-	m_breakables.push_back(new Breakable(m_sharedContext, irr::core::vector3df(-20, -70, 430)));
+	AddBlock(-20, -10, 430);
+	AddBlock(-20, -70, 430);
 	
 	m_worldCollider = m_sceneManager.createMetaTriangleSelector();
 	m_worldCollider->addTriangleSelector(m_terrain->GetCollider());
@@ -35,4 +35,9 @@ void Scene::Update()
 
 	for (auto breakable : m_breakables)
 		breakable->Update();
+}
+
+void Scene::AddBlock(const irr::f32 p_x, const irr::f32 p_y, const irr::f32 p_z, const irr::u16 p_blockSize)
+{
+	m_breakables.push_back(new Breakable(m_sharedContext, irr::core::vector3df(p_x, p_y, p_z), p_blockSize));
 }

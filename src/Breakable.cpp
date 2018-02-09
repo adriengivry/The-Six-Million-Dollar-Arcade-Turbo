@@ -3,7 +3,7 @@
 #include "Window.h"
 #include <string>
 
-Breakable::Breakable(SharedContext* p_sharedContext, const irr::core::vector3df& p_pos)
+Breakable::Breakable(SharedContext* p_sharedContext, const irr::core::vector3df& p_pos, irr::u16 p_blockSize)
 {
 	m_sharedContext = p_sharedContext;
 	m_rotation = 0.f;
@@ -13,7 +13,7 @@ Breakable::Breakable(SharedContext* p_sharedContext, const irr::core::vector3df&
 
 	std::string id = "BREAKABLE_" + std::to_string(m_sharedContext->breakableID++);
 	
-	m_node = m_sharedContext->scene->GetSceneManager().addCubeSceneNode(50, nullptr, ID_Activable);
+	m_node = m_sharedContext->scene->GetSceneManager().addCubeSceneNode(p_blockSize, nullptr, ID_Activable);
 	m_node->setName(id.c_str());
 	m_collider = m_sharedContext->scene->GetSceneManager().createTriangleSelector(m_node->getMesh(), m_node);
 	m_node->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/breakable.png"));
@@ -23,7 +23,11 @@ Breakable::Breakable(SharedContext* p_sharedContext, const irr::core::vector3df&
 
 void Breakable::Destroy()
 {
-	m_breaking = true;
+	if (!m_breaking)
+	{
+		m_breaking = true;
+		m_sharedContext->scene->GetWorldCollider()->removeTriangleSelector(m_collider);
+	}
 }
 
 void Breakable::Update()
@@ -56,6 +60,5 @@ void Breakable::Update()
 	if (m_cleanMePlease)
 	{
 		m_node->setVisible(false);
-		m_sharedContext->scene->GetWorldCollider()->removeTriangleSelector(m_collider);
 	}
 }

@@ -24,6 +24,8 @@ public:
 
 	void InitScene();
 	void Update();
+
+	void AddBlock(irr::f32 p_x, irr::f32 p_y, irr::f32 p_z, irr::u16 p_blockSize = 50);
 private:
 	SharedContext*				m_sharedContext;
 	irr::scene::ISceneManager&	m_sceneManager;
