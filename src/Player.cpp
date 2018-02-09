@@ -218,5 +218,5 @@ bool Player::IsShooting() const
 
 bool Player::CanReverse() const
 {
-	return m_fallingTimer <= 0.1f;
+	return m_fallingTimer <= 0.2f;
 }

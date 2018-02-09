@@ -18,7 +18,7 @@ Terrain::Terrain(SharedContext* p_sharedContext)
 
 	for (uint8_t i = 0; i < m_node->getMaterialCount(); ++i)
 	{
-		m_node->getMaterial(i).setTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/maps/rockwall.jpg"));
+		m_node->getMaterial(i).setTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/maps/rock.png"));
 	}
 
 	// Create collider
