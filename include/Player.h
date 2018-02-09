@@ -17,16 +17,19 @@ public:
 	void Update();
 	void UpdateGun();
 	void UpdateRay();
+	void UpdateLight() const;
 
 	void RotateGun();
 	void TranslateGun();
 	void UpdateRayLength();
-	void UpdateRayCollider();
+	void UpdateRayCollider() const;
 
 	void Reverse();
 	void CheckDeath() const;
+	void Kill() const;
 
 	bool IsShooting() const;
+	bool IsLighting() const;
 	bool CanReverse() const;
 
 	irr::scene::ICameraSceneNode*						GetCameraNode()		const { return m_cameraNode; }
@@ -51,5 +54,5 @@ private:
 	irr::f32 m_rayLength;
 	irr::f32 m_fallingTimer;
 
-	bool m_mouseInverted;	
+	bool m_mouseInverted;
 };

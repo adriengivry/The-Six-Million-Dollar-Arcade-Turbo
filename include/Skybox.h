@@ -11,9 +11,7 @@ public:
 	~Skybox() = default;
 
 	irr::scene::ISceneNode* GetNode() const { return m_skyboxNode; }
-	irr::scene::ILightSceneNode* GetSunNode() const { return m_sunNode; }
 
 private:
 	irr::scene::ISceneNode* m_skyboxNode;
-	irr::scene::ILightSceneNode* m_sunNode;
 };

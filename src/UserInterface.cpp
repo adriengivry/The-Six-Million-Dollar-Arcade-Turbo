@@ -47,7 +47,13 @@ void UserInterface::Draw()
 void UserInterface::Update()
 {
 	if (m_sharedContext->gameInfo.currentScore > 0.f)
-		m_sharedContext->gameInfo.currentScore -= 10.f * m_sharedContext->deltaTime;
+		m_sharedContext->gameInfo.currentScore -= 200.f * m_sharedContext->deltaTime;
+
+	if (m_sharedContext->scene->GetPlayer()->IsShooting())
+		m_sharedContext->gameInfo.currentScore -= 500.f * m_sharedContext->deltaTime;
+	
+	if (m_sharedContext->scene->GetPlayer()->IsLighting())
+		m_sharedContext->gameInfo.currentScore -= 500.f * m_sharedContext->deltaTime;
 
 	m_scoreText->setText(irr::core::stringw(static_cast<irr::u32>(m_sharedContext->gameInfo.currentScore)).c_str());
 }

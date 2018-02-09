@@ -67,6 +67,14 @@ bool EventManager::OnEvent(const irr::SEvent& event)
 			m_mouseLeft = true;
 			break;
 
+		case irr::EMIE_RMOUSE_LEFT_UP:
+			m_mouseRight = false;
+			break;
+
+		case irr::EMIE_RMOUSE_PRESSED_DOWN:
+			m_mouseRight = true;
+			break;
+
 		default:
 			break;
 		}

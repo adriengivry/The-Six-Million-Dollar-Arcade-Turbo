@@ -28,8 +28,7 @@ void Player::CreateCamera()
 
 	// Camera Node
 	m_cameraNode = sceneManager.addCameraSceneNodeFPS(nullptr, 100.f, 0.3f, -1, nullptr, 0, true, 4.f);
-	m_cameraNode->setPosition(irr::core::vector3df(500, 100, 300));
-	m_cameraNode->setTarget(irr::core::vector3df(-70, 30, -60));
+	m_cameraNode->setPosition(irr::core::vector3df(0, 0, 0));
 
 	// Camera Animator
 	m_cameraAnimator = static_cast<irr::scene::ISceneNodeAnimatorCameraFPS*>(*m_cameraNode->getAnimators().begin());
@@ -62,7 +61,10 @@ void Player::CreateGun()
 	m_rayNode->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
 	m_rayNode->getMaterial(0).EmissiveColor.set(255, 255, 255, 0);
 	m_rayNode->setVisible(false);
-	m_gunLightNode = sceneManager.addLightSceneNode(m_rayNode, irr::core::vector3df(0, 0, 0), irr::video::SColorf(1.f, 1.f, 1.f), 50);
+	m_gunLightNode = sceneManager.addLightSceneNode(m_gunNode, irr::core::vector3df(0, 10, 10), irr::video::SColorf(1.f, 1.f, 1.f), 40.f);
+	m_gunLightNode->setLightType(irr::video::ELT_POINT);
+	m_gunLightNode->getLightData().Falloff = 1.0f;
+
 }
 
 void Player::Update()
@@ -76,6 +78,7 @@ void Player::Update()
 
 	UpdateGun();
 	UpdateRay();
+	UpdateLight();
 
 	CheckDeath();
 }
@@ -176,7 +179,12 @@ void Player::UpdateRay()
 	UpdateRayCollider();
 }
 
-void Player::UpdateRayCollider()
+void Player::UpdateLight() const
+{
+	m_gunLightNode->setVisible(IsLighting());
+}
+
+void Player::UpdateRayCollider() const
 {
 	if (m_rayNode->isVisible())
 	{
@@ -207,13 +215,23 @@ void Player::CheckDeath() const
 		m_cameraNode->getPosition().Y > PLAYER_MAX_Y_KILL ||
 		m_sharedContext->gameInfo.currentScore == 0)
 	{
-		exit(0);
+		Kill();
 	}
+}
+
+void Player::Kill() const
+{
+	// KILL THE PLAYER
 }
 
 bool Player::IsShooting() const
 {
 	return m_sharedContext->eventManager->MouseLeftPressed();
+}
+
+bool Player::IsLighting() const
+{
+	return m_sharedContext->eventManager->MouseRightPressed();
 }
 
 bool Player::CanReverse() const
