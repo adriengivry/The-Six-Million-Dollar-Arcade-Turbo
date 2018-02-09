@@ -28,13 +28,6 @@ UserInterface::UserInterface(SharedContext* p_sharedContext)
 
 UserInterface::~UserInterface()
 {
-	m_titleText->drop();
-	m_scoreValue->drop();
-	m_scoreText->drop();
-	m_font->drop();
-	m_skin->drop();
-	m_gui->drop();
-	m_crosshair->drop();
 }
 
 void UserInterface::Draw() const

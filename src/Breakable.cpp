@@ -23,7 +23,6 @@ Breakable::Breakable(SharedContext* p_sharedContext, const irr::core::vector3df&
 
 Breakable::~Breakable()
 {
-	m_node->drop();
 	m_collider->drop();
 }
 

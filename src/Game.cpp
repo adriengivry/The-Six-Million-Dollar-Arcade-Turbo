@@ -3,16 +3,6 @@
 
 Game::Game()
 {
-	Setup();
-}
-
-Game::~Game()
-{
-	Close();
-}
-
-void Game::Setup()
-{
 	m_eventManager = new EventManager(&m_sharedContext);
 	m_sharedContext.eventManager = m_eventManager;
 
@@ -22,19 +12,17 @@ void Game::Setup()
 	m_scene = new Scene(&m_sharedContext);
 	m_sharedContext.scene = m_scene;
 
-	m_scene->InitScene();
+	m_scene->Setup();
 
 	m_userInterface = new UserInterface(&m_sharedContext);
 }
 
-void Game::Close()
+Game::~Game()
 {
-	m_sharedContext.Reset();
-
-	delete m_userInterface;
-	delete m_scene;
 	delete m_eventManager;
 	delete m_window;
+	delete m_userInterface;
+	delete m_scene;
 }
 
 void Game::UpdateDeltaTime()
@@ -51,6 +39,13 @@ void Game::Run()
 	{
 		Update();
 		Draw();
+
+		if (m_sharedContext.gameInfo.playerFailed)
+		{
+			m_scene->Close();
+			m_sharedContext.Reset();
+			m_scene->Setup();
+		}
 	}
 }
 

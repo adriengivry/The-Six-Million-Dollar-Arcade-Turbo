@@ -32,9 +32,6 @@ struct SharedContext
 	void Reset()
 	{
 		gameInfo.Reset();
-		window = nullptr;
-		scene = nullptr;
-		eventManager = nullptr;
 
 		currentTime = 0;
 		lastTime = 0;

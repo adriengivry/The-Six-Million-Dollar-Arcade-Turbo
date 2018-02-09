@@ -22,12 +22,7 @@ Player::Player(SharedContext* p_sharedContext)
 
 Player::~Player()
 {
-	m_rayNode->drop();
-	m_gunLightNode->drop();
-	m_gunNode->drop();
-	m_cameraNode->drop();
-	m_spectateCameraPivotNode->drop();
-	m_spectateCameraNode->drop();
+	m_cameraCollider->drop();
 }
 
 void Player::CreateCamera()
@@ -269,7 +264,7 @@ void Player::CheckDeath() const
 
 void Player::Kill() const
 {
-	// KILL THE PLAYER
+	m_sharedContext->gameInfo.playerFailed = true;
 }
 
 bool Player::IsShooting() const

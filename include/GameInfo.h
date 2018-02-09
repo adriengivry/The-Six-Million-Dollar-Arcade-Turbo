@@ -9,10 +9,12 @@ struct GameInfo
 
 	irr::f32 defaultScore;
 	irr::f32 currentScore;
+	bool playerFailed;
 
 	void Reset()
 	{
 		defaultScore = 20000.f;
 		currentScore = defaultScore;
+		playerFailed = false;
 	}
 };

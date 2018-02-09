@@ -6,26 +6,19 @@
 #include "Player.h"
 #include "Breakable.h"
 
-Scene::Scene(SharedContext* p_sharedContext) : 
-	m_sharedContext(p_sharedContext),
-	m_sceneManager(*m_sharedContext->window->GetDevice()->getSceneManager())
-{}
+Scene::Scene(SharedContext* p_sharedContext)
+{
+	m_sharedContext = p_sharedContext;
+	m_sceneManager = m_sharedContext->window->GetDevice()->getSceneManager();
+}
 
 Scene::~Scene()
 {
-	delete m_player;
-	m_worldCollider->drop();
-
-	for (auto breakable : m_breakables)
-		delete breakable;
-	m_breakables.clear();
-
-	delete m_terrain;
-	delete m_skybox;
+	Close();
 
 }
 
-void Scene::InitScene()
+void Scene::Setup()
 {
 	m_skybox = new Skybox(m_sharedContext);
 	m_terrain = new Terrain(m_sharedContext);
@@ -46,14 +39,27 @@ void Scene::InitScene()
 
 	// Floating Blocks
 
-	
-	m_worldCollider = m_sceneManager.createMetaTriangleSelector();
+
+	m_worldCollider = m_sceneManager->createMetaTriangleSelector();
 	m_worldCollider->addTriangleSelector(m_terrain->GetCollider());
-	
+
 	for (auto breakable : m_breakables)
 		m_worldCollider->addTriangleSelector(breakable->GetCollider());
 
 	m_player = new Player(m_sharedContext);
+}
+
+void Scene::Close()
+{
+	delete m_player;
+	m_worldCollider->drop();
+
+	for (auto breakable : m_breakables)
+		delete breakable;
+	m_breakables.clear();
+
+	delete m_terrain;
+	delete m_skybox;
 }
 
 void Scene::Update()

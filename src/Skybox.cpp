@@ -31,8 +31,6 @@ Skybox::Skybox(SharedContext* p_sharedContext)
 
 Skybox::~Skybox()
 {
-	m_thunderLight->drop();
-	m_lightPivotNode->drop();
 }
 
 void Skybox::Update()

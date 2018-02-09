@@ -29,7 +29,5 @@ Terrain::Terrain(SharedContext* p_sharedContext)
 
 Terrain::~Terrain()
 {
-	m_mesh->drop();
-	m_node->drop();
 	m_collider->drop();
 }
