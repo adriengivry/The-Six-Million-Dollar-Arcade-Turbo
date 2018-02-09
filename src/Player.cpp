@@ -36,7 +36,7 @@ void Player::CreateCamera()
 	m_cameraAnimator->setMoveSpeed(.3f);
 
 	// Camera Collider
-	m_cameraCollider = sceneManager.createCollisionResponseAnimator(m_sharedContext->scene->GetTerrain()->GetCollider(), m_cameraNode);
+	m_cameraCollider = sceneManager.createCollisionResponseAnimator(m_sharedContext->scene->GetWorldCollider(), m_cameraNode);
 	m_cameraCollider->setEllipsoidRadius(irr::core::vector3df(30, 60, 30));
 	m_cameraCollider->setGravity(irr::core::vector3df(0, m_gravity, 0));
 	m_cameraNode->addAnimator(m_cameraCollider);
@@ -61,7 +61,7 @@ void Player::CreateGun()
 	m_rayNode->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/ray_texture.jpg"));
 	m_rayNode->getMaterial(0).EmissiveColor.set(255, 255, 255, 0);
 	m_rayNode->setVisible(false);
-	m_gunLightNode = sceneManager.addLightSceneNode(m_gunNode, irr::core::vector3df(0, 10, 10), irr::video::SColorf(1.f, 1.f, 1.f), 40.f);
+	m_gunLightNode = sceneManager.addLightSceneNode(m_gunNode, irr::core::vector3df(0, 10, 10), irr::video::SColorf(1.f, 1.f, 1.f), 90.f);
 	m_gunLightNode->setLightType(irr::video::ELT_POINT);
 	m_gunLightNode->getLightData().Falloff = 1.0f;
 
@@ -199,12 +199,16 @@ void Player::UpdateRayCollider() const
 			ray,
 			collisionPoint,
 			outTriangle,
-			ID_Activable
+			0
 			);
 
-		if (selectedSceneNode)
+		if (selectedSceneNode && selectedSceneNode->getID() & ID_Activable)
 		{
-			selectedSceneNode->setVisible(false);
+			for (auto breakable : m_sharedContext->scene->GetBreakables())
+			{
+				if (selectedSceneNode->getName() == breakable->GetNode()->getName())
+					breakable->Destroy();
+			}
 		}
 	}
 }

@@ -10,8 +10,13 @@ public:
 	explicit Skybox(SharedContext* p_sharedContext);
 	~Skybox() = default;
 
-	irr::scene::ISceneNode* GetNode() const { return m_skyboxNode; }
+	void Update();
 
 private:
-	irr::scene::ISceneNode* m_skyboxNode;
+	SharedContext* m_sharedContext;
+
+	irr::scene::ISceneNode*					m_lightPivotNode;
+	irr::scene::ILightSceneNode*			m_thunderLight;
+
+	irr::f32 m_lightRotation;
 };

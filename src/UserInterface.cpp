@@ -27,11 +27,6 @@ UserInterface::UserInterface(SharedContext* p_sharedContext)
 	m_scoreText = m_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 30, 200, 50));
 }
 
-UserInterface::~UserInterface()
-{
-
-}
-
 void UserInterface::Draw()
 {
 	m_gui->drawAll();

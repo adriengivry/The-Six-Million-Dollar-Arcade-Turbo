@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Breakable.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\EventManager.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="..\src\Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Breakable.h" />
     <ClInclude Include="..\include\Player.h" />
     <ClInclude Include="..\include\EventManager.h" />
     <ClInclude Include="..\include\Game.h" />

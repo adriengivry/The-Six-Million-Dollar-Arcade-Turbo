@@ -7,7 +7,7 @@ class UserInterface
 {
 public:
 	explicit UserInterface(SharedContext* p_sharedContext);
-	~UserInterface();
+	~UserInterface() = default;
 
 	void Draw();
 
