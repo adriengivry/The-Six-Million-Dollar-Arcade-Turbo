@@ -8,9 +8,9 @@ typedef irr::core::dimension2d<irr::u32> WindowSize;
 class Window
 {
 public:
-	static const irr::u32		WINDOW_WIDTH			= 800;
-	static const irr::u32		WINDOW_HEIGHT			= 600;
-	static const bool			WINDOW_FULLSCREEN		= false;
+	static const irr::u32		WINDOW_WIDTH			= 1920;
+	static const irr::u32		WINDOW_HEIGHT			= 1080;
+	static const bool			WINDOW_FULLSCREEN		= true;
 	static const bool			WINDOW_VSYNC			= true;
 	static const bool			WINDOW_STENCILBUFFER	= false;
 	static const irr::u32		WINDOW_CLEAR_COLOR_R	= 0;
