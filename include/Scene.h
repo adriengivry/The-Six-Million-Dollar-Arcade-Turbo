@@ -3,6 +3,8 @@
 #include <ISceneManager.h>
 #include "Terrain.h"
 #include "Skybox.h"
+#include <vector>
+#include "Breakable.h"
 
 class Player;
 
@@ -16,9 +18,12 @@ public:
 	Terrain*					GetTerrain()		const { return m_terrain; }
 	Skybox*						GetSkybox()			const { return m_skybox; }
 	Player*						GetPlayer()			const { return m_player; }
+	std::vector<Breakable*>&	GetBreakables()		{ return m_breakables; }
+
+	irr::scene::IMetaTriangleSelector* GetWorldCollider() const { return m_worldCollider; }
 
 	void InitScene();
-	void Update() const;
+	void Update();
 private:
 	SharedContext*				m_sharedContext;
 	irr::scene::ISceneManager&	m_sceneManager;
@@ -26,4 +31,8 @@ private:
 	Player*		m_player;
 	Terrain*	m_terrain;
 	Skybox*		m_skybox;
+
+	std::vector<Breakable*> m_breakables;
+
+	irr::scene::IMetaTriangleSelector* m_worldCollider;
 };

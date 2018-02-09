@@ -15,7 +15,7 @@ public:
 	static const bool			WINDOW_STENCILBUFFER	= false;
 	static const irr::u32		WINDOW_CLEAR_COLOR_R	= 0;
 	static const irr::u32		WINDOW_CLEAR_COLOR_G	= 0;
-	static const irr::u32		WINDOW_CLEAR_COLOR_B	= 255;
+	static const irr::u32		WINDOW_CLEAR_COLOR_B	= 0;
 	static const DriverType		DEVICE_TYPE				= irr::video::EDT_OPENGL;
 
 	explicit Window(EventManager* p_eventManager = nullptr);

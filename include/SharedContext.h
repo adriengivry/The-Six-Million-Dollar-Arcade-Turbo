@@ -12,6 +12,7 @@ enum
 {
 	ID_NotActivable = 0,
 	ID_Activable = 1 << 0,
+	ID_Laser = 2 << 0,
 };
 
 struct SharedContext
@@ -24,4 +25,6 @@ struct SharedContext
 	irr::u32 currentTime = 0;
 	irr::u32 lastTime = 0;
 	irr::f32 deltaTime = 0;
+
+	irr::u32 breakableID = 0;
 };
