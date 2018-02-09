@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Player.h"
 
 Game::Game()
 {
@@ -47,6 +48,18 @@ void Game::Update()
 	m_eventManager->Update();
 	m_scene->Update();
 	m_userInterface->Update();
+
+	if (m_scene->GetPlayer()->IsPlaying())
+	{
+		if (m_sharedContext.gameInfo.currentScore > 0.f)
+			m_sharedContext.gameInfo.currentScore -= 200.f * m_sharedContext.deltaTime;
+
+		if (m_scene->GetPlayer()->IsShooting())
+			m_sharedContext.gameInfo.currentScore -= 500.f * m_sharedContext.deltaTime;
+
+		if (m_scene->GetPlayer()->IsLighting())
+			m_sharedContext.gameInfo.currentScore -= 500.f * m_sharedContext.deltaTime;
+	}
 }
 
 void Game::Draw() const

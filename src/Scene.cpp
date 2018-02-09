@@ -16,8 +16,22 @@ void Scene::InitScene()
 	m_skybox = new Skybox(m_sharedContext);
 	m_terrain = new Terrain(m_sharedContext);
 
+	// Static Blocks
 	AddBlock(-20, -10, 430);
 	AddBlock(-20, -70, 430);
+	AddBlock(20, 75, 2480);
+	AddBlock(-50, 75, 2480);
+	AddBlock(-22, 430, 3180);
+	AddBlock(70, 830, 3420);
+	AddBlock(-10, 830, 3420);
+	AddBlock(-105, 830, 3420);
+	AddBlock(610, 400, 3260);
+
+	// Rotating Blocks
+
+
+	// Floating Blocks
+
 	
 	m_worldCollider = m_sceneManager.createMetaTriangleSelector();
 	m_worldCollider->addTriangleSelector(m_terrain->GetCollider());

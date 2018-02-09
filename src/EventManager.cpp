@@ -47,6 +47,11 @@ void EventManager::Update() const
 {
 	if (IsKeyDown(irr::KEY_KEY_X) && m_sharedContext->scene->GetPlayer()->CanReverse())
 		m_sharedContext->scene->GetPlayer()->Reverse();
+
+	if (IsKeyDown(irr::KEY_RETURN) && !m_sharedContext->scene->GetPlayer()->IsPlaying())
+	{
+		m_sharedContext->scene->GetSceneManager().setActiveCamera(m_sharedContext->scene->GetPlayer()->GetCameraNode());
+	}
 }
 
 bool EventManager::OnEvent(const irr::SEvent& event)

@@ -14,6 +14,7 @@ Player::Player(SharedContext* p_sharedContext)
 	m_gravityTimer = 0.f;
 	m_rayLength = 0.f;
 	m_fallingTimer = 0.f;
+	m_spectateCameraRotation = 0.f;
 
 	CreateCamera();
 	CreateGun();
@@ -26,8 +27,18 @@ void Player::CreateCamera()
 	irr::SKeyMap*	fpsKeyMap = m_sharedContext->eventManager->GetKeyMap("FPS_CAMERA");
 	const irr::s32	fpsKeyMapSize = m_sharedContext->eventManager->GetKeyMapSize("FPS_CAMERA");
 
+	// Spectate Camera Node
+	m_spectateCameraPivotNode = sceneManager.addEmptySceneNode(nullptr);
+	m_spectateCameraPivotNode->setPosition(irr::core::vector3df(0, 1000.f, 2000.f));
+
+	m_spectateCameraNode = sceneManager.addCameraSceneNode(m_spectateCameraPivotNode, irr::core::vector3df(0, 0, 1000.f));
+	m_spectateCameraNode->setTarget(m_spectateCameraPivotNode->getPosition() + irr::core::vector3df(0, -500.f, 0));
+	
+	sceneManager.setActiveCamera(m_spectateCameraNode);
+
+
 	// Camera Node
-	m_cameraNode = sceneManager.addCameraSceneNodeFPS(nullptr, 100.f, 0.3f, -1, nullptr, 0, true, 4.f);
+	m_cameraNode = sceneManager.addCameraSceneNodeFPS(nullptr, 100.f, 0.3f, -1, nullptr, 0, true, 4.f, false, false);
 	m_cameraNode->setPosition(irr::core::vector3df(0, 0, 0));
 
 	// Camera Animator
@@ -69,26 +80,38 @@ void Player::CreateGun()
 
 void Player::Update()
 {
-	m_gravityTimer += m_sharedContext->deltaTime;
+	if (IsPlaying())
+	{
+		m_gravityTimer += m_sharedContext->deltaTime;
 
-	std::cout << m_cameraNode->getPosition().X << "|" << m_cameraNode->getPosition().Y << "|" << m_cameraNode->getPosition().Z << std::endl;
+		std::cout << m_cameraNode->getPosition().X << "|" << m_cameraNode->getPosition().Y << "|" << m_cameraNode->getPosition().Z << std::endl;
 
-	if (m_cameraCollider->isFalling())
-		m_fallingTimer += m_sharedContext->deltaTime;
+		if (m_cameraCollider->isFalling())
+			m_fallingTimer += m_sharedContext->deltaTime;
+		else
+			m_fallingTimer = 0.f;
+
+		UpdateGun();
+		UpdateRay();
+		UpdateLight();
+
+		CheckDeath();
+	}
 	else
-		m_fallingTimer = 0.f;
-
-	UpdateGun();
-	UpdateRay();
-	UpdateLight();
-
-	CheckDeath();
+	{
+		UpdateSpectateCamera();
+	}
 }
 
 void Player::UpdateGun()
 {
 	RotateGun();
 	TranslateGun();
+}
+
+bool Player::IsPlaying() const
+{
+	return m_sharedContext->scene->GetSceneManager().getActiveCamera() == m_cameraNode;
 }
 
 void Player::Reverse()
@@ -213,6 +236,15 @@ void Player::UpdateRayCollider() const
 			}
 		}
 	}
+}
+
+void Player::UpdateSpectateCamera()
+{
+	m_spectateCameraPivotNode->setRotation(m_spectateCameraPivotNode->getRotation() - irr::core::vector3df(0, m_spectateCameraRotation, 0));
+
+	m_spectateCameraRotation += 20.f * m_sharedContext->deltaTime;
+
+	m_spectateCameraPivotNode->setRotation(m_spectateCameraPivotNode->getRotation() + irr::core::vector3df(0, m_spectateCameraRotation, 0));
 }
 
 void Player::CheckDeath() const

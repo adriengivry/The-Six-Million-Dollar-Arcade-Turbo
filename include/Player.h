@@ -24,6 +24,10 @@ public:
 	void UpdateRayLength();
 	void UpdateRayCollider() const;
 
+	void UpdateSpectateCamera();
+
+	bool IsPlaying() const;
+
 	void Reverse();
 	void CheckDeath() const;
 	void Kill() const;
@@ -39,6 +43,8 @@ public:
 private:
 	SharedContext* m_sharedContext;
 
+	irr::scene::ISceneNode*					m_spectateCameraPivotNode;
+	irr::scene::ICameraSceneNode*			m_spectateCameraNode;
 	irr::scene::ICameraSceneNode*			m_cameraNode;
 	irr::scene::IAnimatedMeshSceneNode*		m_gunNode;
 	irr::scene::IAnimatedMeshSceneNode*		m_rayNode;
@@ -53,6 +59,8 @@ private:
 	irr::f32 m_gunTranslation;
 	irr::f32 m_rayLength;
 	irr::f32 m_fallingTimer;
+
+	irr::f32 m_spectateCameraRotation;
 
 	bool m_mouseInverted;
 };

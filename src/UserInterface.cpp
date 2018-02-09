@@ -22,33 +22,35 @@ UserInterface::UserInterface(SharedContext* p_sharedContext)
 	
 	m_skin->setFont(m_font);
 
-	m_gui->addStaticText(L"SCORE:", irr::core::rect<irr::s32>(30, 30, 200, 50));
-
-	m_scoreText = m_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 30, 200, 50));
+	m_scoreText = m_gui->addStaticText(L"SCORE:", irr::core::rect<irr::s32>(30, 30, 200, 50));
+	m_scoreValue = m_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 30, 200, 50));
+	m_titleText = m_gui->addStaticText(L"PRESS [ENTER] TO GO TO HELL", irr::core::rect<irr::s32>(Window::WINDOW_WIDTH / 2 - 50, Window::WINDOW_HEIGHT / 2, Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT));
 }
 
-void UserInterface::Draw()
+void UserInterface::Draw() const
 {
-	m_gui->drawAll();
+	if (m_sharedContext->scene->GetPlayer()->IsPlaying())
+	{
+		m_scoreText->draw();
+		m_scoreValue->draw();
 
-	m_sharedContext->window->GetDriver()->draw2DImage(m_crosshair,
-		irr::core::position2d<irr::s32>(Window::WINDOW_WIDTH / 2 - 8, Window::WINDOW_HEIGHT / 2 - 8),
-		irr::core::rect<irr::s32>(0, 0, 16, 16),
-		0,
-		irr::video::SColor(255, 255, 255, 255),
-		true);
+		m_sharedContext->window->GetDriver()->draw2DImage(m_crosshair,
+			irr::core::position2d<irr::s32>(Window::WINDOW_WIDTH / 2 - 8, Window::WINDOW_HEIGHT / 2 - 8),
+			irr::core::rect<irr::s32>(0, 0, 16, 16),
+			0,
+			irr::video::SColor(255, 255, 255, 255),
+			true);
+	}
+	else
+	{
+		m_titleText->draw();
+	}
 }
 
 void UserInterface::Update()
 {
-	if (m_sharedContext->gameInfo.currentScore > 0.f)
-		m_sharedContext->gameInfo.currentScore -= 200.f * m_sharedContext->deltaTime;
-
-	if (m_sharedContext->scene->GetPlayer()->IsShooting())
-		m_sharedContext->gameInfo.currentScore -= 500.f * m_sharedContext->deltaTime;
-	
-	if (m_sharedContext->scene->GetPlayer()->IsLighting())
-		m_sharedContext->gameInfo.currentScore -= 500.f * m_sharedContext->deltaTime;
-
-	m_scoreText->setText(irr::core::stringw(static_cast<irr::u32>(m_sharedContext->gameInfo.currentScore)).c_str());
+	if (m_sharedContext->scene->GetPlayer()->IsPlaying())
+	{
+		m_scoreValue->setText(irr::core::stringw(static_cast<irr::u32>(m_sharedContext->gameInfo.currentScore)).c_str());
+	}
 }
