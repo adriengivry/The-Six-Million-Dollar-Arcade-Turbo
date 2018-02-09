@@ -29,6 +29,12 @@ Skybox::Skybox(SharedContext* p_sharedContext)
 
 }
 
+Skybox::~Skybox()
+{
+	m_thunderLight->drop();
+	m_lightPivotNode->drop();
+}
+
 void Skybox::Update()
 {
 	m_lightPivotNode->setRotation(m_lightPivotNode->getRotation() - irr::core::vector3df(m_lightRotation, m_lightRotation, m_lightRotation));

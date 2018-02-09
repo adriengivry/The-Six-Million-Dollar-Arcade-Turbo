@@ -9,7 +9,7 @@ public:
 	static const irr::s32 PLAYER_MAX_Y_KILL	= 2000.f;
 
 	explicit Player(SharedContext* p_sharedContext);
-	~Player() = default;
+	~Player();
 
 	void CreateCamera();
 	void CreateGun();

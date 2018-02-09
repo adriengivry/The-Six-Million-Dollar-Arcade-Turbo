@@ -11,6 +11,20 @@ Scene::Scene(SharedContext* p_sharedContext) :
 	m_sceneManager(*m_sharedContext->window->GetDevice()->getSceneManager())
 {}
 
+Scene::~Scene()
+{
+	delete m_player;
+	m_worldCollider->drop();
+
+	for (auto breakable : m_breakables)
+		delete breakable;
+	m_breakables.clear();
+
+	delete m_terrain;
+	delete m_skybox;
+
+}
+
 void Scene::InitScene()
 {
 	m_skybox = new Skybox(m_sharedContext);

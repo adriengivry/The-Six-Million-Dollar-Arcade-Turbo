@@ -10,6 +10,9 @@ public:
 	Game();
 	~Game();
 
+	void Setup();
+	void Close();
+
 	void UpdateDeltaTime();
 
 	void Run();

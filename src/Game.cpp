@@ -3,6 +3,16 @@
 
 Game::Game()
 {
+	Setup();
+}
+
+Game::~Game()
+{
+	Close();
+}
+
+void Game::Setup()
+{
 	m_eventManager = new EventManager(&m_sharedContext);
 	m_sharedContext.eventManager = m_eventManager;
 
@@ -17,9 +27,13 @@ Game::Game()
 	m_userInterface = new UserInterface(&m_sharedContext);
 }
 
-Game::~Game()
+void Game::Close()
 {
+	m_sharedContext.Reset();
+
+	delete m_userInterface;
 	delete m_scene;
+	delete m_eventManager;
 	delete m_window;
 }
 

@@ -8,23 +8,33 @@
 UserInterface::UserInterface(SharedContext* p_sharedContext)
 {
 	m_sharedContext = p_sharedContext;
-	m_crosshair = p_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/crosshair.png").c_str());
 
+	// Create crosshait
+	m_crosshair = p_sharedContext->window->GetDriver()->getTexture(Utils::LoadAsset("textures/crosshair.png").c_str());
 	m_sharedContext->window->GetDevice()->getCursorControl()->setVisible(false);
 
+	// Create GUI and font
 	m_gui = p_sharedContext->window->GetDevice()->getGUIEnvironment();
-
 	m_skin = m_gui->getSkin();
-
 	m_font = m_gui->getFont("../assets/fonts/fontcourier.bmp");
-
 	m_skin->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 255, 255, 255));
-	
 	m_skin->setFont(m_font);
 
+	// Create StaticTexts
 	m_scoreText = m_gui->addStaticText(L"SCORE:", irr::core::rect<irr::s32>(30, 30, 200, 50));
 	m_scoreValue = m_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 30, 200, 50));
 	m_titleText = m_gui->addStaticText(L"PRESS [ENTER] TO GO TO HELL", irr::core::rect<irr::s32>(Window::WINDOW_WIDTH / 2 - 50, Window::WINDOW_HEIGHT / 2, Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT));
+}
+
+UserInterface::~UserInterface()
+{
+	m_titleText->drop();
+	m_scoreValue->drop();
+	m_scoreText->drop();
+	m_font->drop();
+	m_skin->drop();
+	m_gui->drop();
+	m_crosshair->drop();
 }
 
 void UserInterface::Draw() const
@@ -47,7 +57,7 @@ void UserInterface::Draw() const
 	}
 }
 
-void UserInterface::Update()
+void UserInterface::Update() const
 {
 	if (m_sharedContext->scene->GetPlayer()->IsPlaying())
 	{

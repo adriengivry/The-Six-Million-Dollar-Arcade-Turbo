@@ -5,7 +5,7 @@ class Terrain
 {
 public:
 	explicit Terrain(SharedContext* p_sharedContext);
-	~Terrain() = default;
+	~Terrain();
 
 	irr::scene::IAnimatedMesh*			GetMesh()		const { return m_mesh; }
 	irr::scene::ITriangleSelector*		GetCollider()	const { return m_collider; }

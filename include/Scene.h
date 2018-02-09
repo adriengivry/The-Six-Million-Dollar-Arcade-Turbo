@@ -12,7 +12,7 @@ class Scene
 {
 public:
 	explicit Scene(SharedContext* p_sharedContext);
-	~Scene() = default;
+	~Scene();
 
 	irr::scene::ISceneManager&	GetSceneManager()	const { return m_sceneManager; }
 	Terrain*					GetTerrain()		const { return m_terrain; }

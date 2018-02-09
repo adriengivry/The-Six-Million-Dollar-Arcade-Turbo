@@ -17,14 +17,28 @@ enum
 
 struct SharedContext
 {
+	SharedContext() { Reset(); }
+
 	GameInfo		gameInfo;
 	Window*			window;
 	Scene*			scene;
 	EventManager*	eventManager;
 
-	irr::u32 currentTime = 0;
-	irr::u32 lastTime = 0;
-	irr::f32 deltaTime = 0;
+	irr::u32 currentTime;
+	irr::u32 lastTime;
+	irr::f32 deltaTime;
+	irr::u32 breakableID;
 
-	irr::u32 breakableID = 0;
+	void Reset()
+	{
+		gameInfo.Reset();
+		window = nullptr;
+		scene = nullptr;
+		eventManager = nullptr;
+
+		currentTime = 0;
+		lastTime = 0;
+		deltaTime = 0;
+		breakableID = 0;
+	}
 };

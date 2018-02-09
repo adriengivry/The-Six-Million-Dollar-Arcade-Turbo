@@ -7,11 +7,11 @@ class UserInterface
 {
 public:
 	explicit UserInterface(SharedContext* p_sharedContext);
-	~UserInterface() = default;
+	~UserInterface();
 
 	void Draw() const;
 
-	void Update();
+	void Update() const;
 
 private:
 	SharedContext*					m_sharedContext;

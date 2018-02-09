@@ -20,6 +20,16 @@ Player::Player(SharedContext* p_sharedContext)
 	CreateGun();
 }
 
+Player::~Player()
+{
+	m_rayNode->drop();
+	m_gunLightNode->drop();
+	m_gunNode->drop();
+	m_cameraNode->drop();
+	m_spectateCameraPivotNode->drop();
+	m_spectateCameraNode->drop();
+}
+
 void Player::CreateCamera()
 {
 	SceneManager& sceneManager = m_sharedContext->scene->GetSceneManager();

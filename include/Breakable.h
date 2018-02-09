@@ -6,7 +6,7 @@ class Breakable
 {
 public:
 	Breakable(SharedContext* p_sharedContext, const irr::core::vector3df& p_pos, irr::u16 p_blockSize = 50);
-	~Breakable() = default;
+	~Breakable();
 
 	irr::scene::IMeshSceneNode*		GetNode()		const { return m_node; }
 	irr::scene::ITriangleSelector*	GetCollider()	const { return m_collider; }

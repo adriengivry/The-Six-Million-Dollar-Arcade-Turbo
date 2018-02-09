@@ -26,3 +26,10 @@ Terrain::Terrain(SharedContext* p_sharedContext)
 	m_collider = sceneManager.createTriangleSelector(m_mesh->getMesh(0), m_node);
 	m_node->setTriangleSelector(m_collider);
 }
+
+Terrain::~Terrain()
+{
+	m_mesh->drop();
+	m_node->drop();
+	m_collider->drop();
+}

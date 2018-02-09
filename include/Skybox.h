@@ -8,7 +8,7 @@ class Skybox
 {
 public:
 	explicit Skybox(SharedContext* p_sharedContext);
-	~Skybox() = default;
+	~Skybox();
 
 	void Update();
 
