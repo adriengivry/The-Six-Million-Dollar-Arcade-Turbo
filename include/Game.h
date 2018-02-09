@@ -15,6 +15,7 @@ public:
 	void Run();
 	void Update();
 	void Draw() const;
+	void UpdateScores();
 
 private:
 	SharedContext	m_sharedContext;

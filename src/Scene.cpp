@@ -20,8 +20,8 @@ Scene::~Scene()
 
 void Scene::Setup()
 {
-	m_skybox = new Skybox(m_sharedContext);
 	m_terrain = new Terrain(m_sharedContext);
+	m_skybox = new Skybox(m_sharedContext);
 
 	// Static Blocks
 	AddBlock(-20, -10, 430);
@@ -52,14 +52,13 @@ void Scene::Setup()
 void Scene::Close()
 {
 	delete m_player;
-	m_worldCollider->drop();
 
-	for (auto breakable : m_breakables)
-		delete breakable;
-	m_breakables.clear();
+	m_breakables.empty();
 
 	delete m_terrain;
 	delete m_skybox;
+
+	m_worldCollider->removeAllTriangleSelectors();
 }
 
 void Scene::Update()

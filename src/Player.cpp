@@ -4,6 +4,7 @@
 #include "Utilities.h"
 #include "Window.h"
 #include <iostream>
+#include <fstream>
 
 Player::Player(SharedContext* p_sharedContext)
 {
@@ -35,9 +36,9 @@ void Player::CreateCamera()
 	// Spectate Camera Node
 	m_spectateCameraPivotNode = sceneManager.addEmptySceneNode(nullptr);
 	m_spectateCameraPivotNode->setPosition(irr::core::vector3df(0, 1000.f, 2000.f));
-
 	m_spectateCameraNode = sceneManager.addCameraSceneNode(m_spectateCameraPivotNode, irr::core::vector3df(0, 0, 1000.f));
 	m_spectateCameraNode->setTarget(m_spectateCameraPivotNode->getPosition() + irr::core::vector3df(0, -500.f, 0));
+	m_spectateCameraNode->setFarValue(5000.f);
 	
 	sceneManager.setActiveCamera(m_spectateCameraNode);
 
@@ -45,6 +46,7 @@ void Player::CreateCamera()
 	// Camera Node
 	m_cameraNode = sceneManager.addCameraSceneNodeFPS(nullptr, 100.f, 0.3f, -1, nullptr, 0, true, 4.f, false, false);
 	m_cameraNode->setPosition(irr::core::vector3df(0, 0, 0));
+	m_cameraNode->setFarValue(5000.f);
 
 	// Camera Animator
 	m_cameraAnimator = static_cast<irr::scene::ISceneNodeAnimatorCameraFPS*>(*m_cameraNode->getAnimators().begin());
@@ -89,8 +91,6 @@ void Player::Update()
 	{
 		m_gravityTimer += m_sharedContext->deltaTime;
 
-		std::cout << m_cameraNode->getPosition().X << "|" << m_cameraNode->getPosition().Y << "|" << m_cameraNode->getPosition().Z << std::endl;
-
 		if (m_cameraCollider->isFalling())
 			m_fallingTimer += m_sharedContext->deltaTime;
 		else
@@ -100,6 +100,7 @@ void Player::Update()
 		UpdateRay();
 		UpdateLight();
 
+		CheckWin();
 		CheckDeath();
 	}
 	else
@@ -232,12 +233,14 @@ void Player::UpdateRayCollider() const
 			0
 			);
 
-		if (selectedSceneNode && selectedSceneNode->getID() & ID_Activable)
+		if (selectedSceneNode && selectedSceneNode->getID() & ID_Activable && !selectedSceneNode->getMaterial(0).getFlag(irr::video::EMF_WIREFRAME))
 		{
 			for (auto breakable : m_sharedContext->scene->GetBreakables())
 			{
-				if (selectedSceneNode->getName() == breakable->GetNode()->getName())
+				if (std::string(selectedSceneNode->getName()) == std::string(breakable->GetNode()->getName()))
+				{
 					breakable->Destroy();
+				}
 			}
 		}
 	}
@@ -262,9 +265,27 @@ void Player::CheckDeath() const
 	}
 }
 
+void Player::CheckWin() const
+{
+	const irr::core::vector3df ggwp(2017, -400, 2700);
+
+	if (m_cameraNode->getPosition().getDistanceFrom(ggwp) <= 150 && !m_cameraCollider->isFalling())
+	{
+		std::ofstream outfile;
+		outfile.open("../assets/scores/data.txt", std::ios_base::app);
+		outfile << "\n" + std::to_string(static_cast<irr::u32>(m_sharedContext->gameInfo.currentScore));
+
+		Kill();
+	}
+}
+
 void Player::Kill() const
 {
-	m_sharedContext->gameInfo.playerFailed = true;
+	if (!m_sharedContext->gameInfo.playerFailed)
+	{
+		m_sharedContext->gameInfo.playerFailed = true;
+		m_sharedContext->scene->GetSkybox()->SetSpectateLight();
+	}
 }
 
 bool Player::IsShooting() const

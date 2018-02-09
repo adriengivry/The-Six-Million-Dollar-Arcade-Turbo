@@ -12,6 +12,9 @@ public:
 
 	void Update();
 
+	void SetGameLight();
+	void SetSpectateLight();
+
 private:
 	SharedContext* m_sharedContext;
 
@@ -19,4 +22,5 @@ private:
 	irr::scene::ILightSceneNode*			m_thunderLight;
 
 	irr::f32 m_lightRotation;
+	irr::f32 m_lightRotationSpeed;
 };

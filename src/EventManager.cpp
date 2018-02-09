@@ -51,6 +51,7 @@ void EventManager::Update() const
 	if (IsKeyDown(irr::KEY_RETURN) && !m_sharedContext->scene->GetPlayer()->IsPlaying())
 	{
 		m_sharedContext->scene->GetSceneManager().setActiveCamera(m_sharedContext->scene->GetPlayer()->GetCameraNode());
+		m_sharedContext->scene->GetSkybox()->SetGameLight();
 	}
 }
 

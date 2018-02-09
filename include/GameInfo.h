@@ -13,7 +13,7 @@ struct GameInfo
 
 	void Reset()
 	{
-		defaultScore = 20000.f;
+		defaultScore = 100000.f;
 		currentScore = defaultScore;
 		playerFailed = false;
 	}

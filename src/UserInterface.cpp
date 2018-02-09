@@ -22,8 +22,11 @@ UserInterface::UserInterface(SharedContext* p_sharedContext)
 
 	// Create StaticTexts
 	m_scoreText = m_gui->addStaticText(L"SCORE:", irr::core::rect<irr::s32>(30, 30, 200, 50));
-	m_scoreValue = m_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 30, 200, 50));
 	m_titleText = m_gui->addStaticText(L"PRESS [ENTER] TO GO TO HELL", irr::core::rect<irr::s32>(Window::WINDOW_WIDTH / 2 - 50, Window::WINDOW_HEIGHT / 2, Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT));
+	m_howToPlayText = m_gui->addStaticText(L"GOAL: Reach the end\n\nCOMMANDS: [X] to reverse gravity\n[Mouse Left] to shoot cubes\n[Mouse Right] to use your light\n\nTIPS: The less you use your light and gun,\nthe higher your score will be", irr::core::rect<irr::s32>(Window::WINDOW_WIDTH / 2 - 50, Window::WINDOW_HEIGHT / 2 + 50, Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT));
+	m_lastScoreText = m_gui->addStaticText(L"", irr::core::rect<irr::s32>(Window::WINDOW_WIDTH / 2 - 50, Window::WINDOW_HEIGHT / 2 + 350, Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT));
+	m_highscoreText = m_gui->addStaticText(L"", irr::core::rect<irr::s32>(Window::WINDOW_WIDTH / 2 - 50, Window::WINDOW_HEIGHT / 2 + 375, Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT));
+
 }
 
 UserInterface::~UserInterface()
@@ -35,7 +38,6 @@ void UserInterface::Draw() const
 	if (m_sharedContext->scene->GetPlayer()->IsPlaying())
 	{
 		m_scoreText->draw();
-		m_scoreValue->draw();
 
 		m_sharedContext->window->GetDriver()->draw2DImage(m_crosshair,
 			irr::core::position2d<irr::s32>(Window::WINDOW_WIDTH / 2 - 8, Window::WINDOW_HEIGHT / 2 - 8),
@@ -47,6 +49,9 @@ void UserInterface::Draw() const
 	else
 	{
 		m_titleText->draw();
+		m_howToPlayText->draw();
+		m_lastScoreText->draw();
+		m_highscoreText->draw();
 	}
 }
 
@@ -54,6 +59,13 @@ void UserInterface::Update() const
 {
 	if (m_sharedContext->scene->GetPlayer()->IsPlaying())
 	{
-		m_scoreValue->setText(irr::core::stringw(static_cast<irr::u32>(m_sharedContext->gameInfo.currentScore)).c_str());
+		std::string score = "SCORE:" + std::to_string(static_cast<irr::u32>(m_sharedContext->gameInfo.currentScore));
+		m_scoreText->setText(irr::core::stringw(score.c_str()).c_str());
 	}
+
+	std::string lastScore = "LAST SCORE:" + std::to_string(static_cast<irr::u32>(m_sharedContext->lastScore));
+	m_lastScoreText->setText(irr::core::stringw(lastScore.c_str()).c_str());
+
+	std::string highestScore = "HIGHEST SCORE:" + std::to_string(static_cast<irr::u32>(m_sharedContext->highestScore));
+	m_highscoreText->setText(irr::core::stringw(highestScore.c_str()).c_str());
 }

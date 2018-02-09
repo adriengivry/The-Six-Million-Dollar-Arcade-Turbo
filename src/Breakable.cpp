@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Window.h"
 #include <string>
+#include <iostream>
 
 Breakable::Breakable(SharedContext* p_sharedContext, const irr::core::vector3df& p_pos, irr::u16 p_blockSize)
 {
@@ -19,6 +20,8 @@ Breakable::Breakable(SharedContext* p_sharedContext, const irr::core::vector3df&
 	m_node->setMaterialTexture(0, m_sharedContext->window->GetDriver()->getTexture("../assets/textures/breakable.png"));
 	m_node->setTriangleSelector(m_collider);
 	m_node->setPosition(p_pos);
+
+	// auto text =  m_sharedContext->scene->GetSceneManager().addTextSceneNode(font, irr::core::stringw(id.c_str()).c_str());
 }
 
 Breakable::~Breakable()

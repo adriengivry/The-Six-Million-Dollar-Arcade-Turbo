@@ -30,6 +30,7 @@ public:
 
 	void Reverse();
 	void CheckDeath() const;
+	void CheckWin() const;
 	void Kill() const;
 
 	bool IsShooting() const;

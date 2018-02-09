@@ -29,6 +29,9 @@ struct SharedContext
 	irr::f32 deltaTime;
 	irr::u32 breakableID;
 
+	irr::u32 lastScore = 0;
+	irr::u32 highestScore = 0;
+
 	void Reset()
 	{
 		gameInfo.Reset();
