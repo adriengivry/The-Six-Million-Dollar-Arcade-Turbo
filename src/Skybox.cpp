@@ -34,16 +34,17 @@ Skybox::~Skybox()
 
 void Skybox::Update()
 {
-	m_lightPivotNode->setRotation(m_lightPivotNode->getRotation() - irr::core::vector3df(m_lightRotation, m_lightRotation, m_lightRotation));
+	m_lightPivotNode->setRotation(m_lightPivotNode->getRotation() - irr::core::vector3df(0, m_lightRotation, 0));
 
 	m_lightRotation += m_lightRotationSpeed * m_sharedContext->deltaTime;
 
-	m_lightPivotNode->setRotation(m_lightPivotNode->getRotation() + irr::core::vector3df(m_lightRotation, m_lightRotation, m_lightRotation));
+	m_lightPivotNode->setRotation(m_lightPivotNode->getRotation() + irr::core::vector3df(0, m_lightRotation, 0));
 }
 
 void Skybox::SetGameLight()
 {
 	m_lightRotation = 0.f;
+	m_lightPivotNode->setRotation(irr::core::vector3df(0, m_lightRotation, 0));
 	m_thunderLight->setRadius(1000.f);
 	m_sharedContext->scene->GetSceneManager().setAmbientLight(irr::video::SColorf(0, 0, 0));
 	m_sharedContext->scene->GetTerrain()->GetNode()->setMaterialFlag(irr::video::EMF_FOG_ENABLE, true);
@@ -53,6 +54,7 @@ void Skybox::SetGameLight()
 void Skybox::SetSpectateLight()
 {
 	m_lightRotation = 45.f;
+	m_lightPivotNode->setRotation(irr::core::vector3df(0, m_lightRotation, 0));
 	m_thunderLight->setRadius(5000.f);
 	m_sharedContext->scene->GetSceneManager().setAmbientLight(irr::video::SColorf(0.8, 0.8, 0.8));
 	m_sharedContext->scene->GetTerrain()->GetNode()->setMaterialFlag(irr::video::EMF_FOG_ENABLE, false);
