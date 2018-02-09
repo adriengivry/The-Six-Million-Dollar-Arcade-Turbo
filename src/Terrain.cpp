@@ -15,6 +15,7 @@ Terrain::Terrain(SharedContext* p_sharedContext)
 	m_node = sceneManager.addMeshSceneNode(m_mesh, nullptr, ID_NotActivable);
 	m_node->setPosition(irr::core::vector3df(100, -100, -50));
 	m_node->setScale(irr::core::vector3df(0.6, 0.6, 0.6));
+	m_node->setMaterialFlag(irr::video::EMF_FOG_ENABLE, true);
 
 	for (uint8_t i = 0; i < m_node->getMaterialCount(); ++i)
 	{

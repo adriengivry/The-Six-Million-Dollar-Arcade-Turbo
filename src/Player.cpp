@@ -71,6 +71,8 @@ void Player::Update()
 {
 	m_gravityTimer += m_sharedContext->deltaTime;
 
+	std::cout << m_cameraNode->getPosition().X << "|" << m_cameraNode->getPosition().Y << "|" << m_cameraNode->getPosition().Z << std::endl;
+
 	if (m_cameraCollider->isFalling())
 		m_fallingTimer += m_sharedContext->deltaTime;
 	else
