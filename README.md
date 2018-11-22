@@ -7,3 +7,6 @@ Here is "The Six Million Dollar Arcade Turbo", the new physic game that your chi
 ## Download
 
 - 64 bits : http://adrien-givry.com/download/six-million-dollar-arcade-turbo-x64.zip
+
+## Links
+- Itch.io page : [link](https://gyvr.itch.io/six-million-dollar-arcade-turbo)
